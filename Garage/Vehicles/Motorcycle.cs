@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace GarageTask.Vehicles
 {
-    internal class Motorcycle
+    internal class Motorcycle : Vehicle
     {
     }
 }
