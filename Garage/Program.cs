@@ -17,6 +17,8 @@ namespace GarageTask {
                 Console.WriteLine(v.GetType());
             }
 
+            garage.PrintGarage(3);
+
         }
     }
 }

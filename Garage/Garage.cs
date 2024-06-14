@@ -37,6 +37,36 @@ namespace GarageTask {
             return false;
         }
 
+        public void PrintGarage(int columns) {
+
+            int columnsPrinted = 0;
+            int spacesPrinted = 0;
+
+            foreach (IVehicle v in this) {
+                Console.Write($"{spacesPrinted}. [V] ");
+                columnsPrinted++;
+                spacesPrinted++;
+
+                if (columnsPrinted == columns) {
+                    Console.Write("\n");
+                    columnsPrinted = 0;
+                }
+            }
+
+            for (int i = 0; i < RemainingGarageSpaces; i++) {
+                Console.Write($"{spacesPrinted}. [ ] ");
+                columnsPrinted++;
+                spacesPrinted++;
+
+
+                if (columnsPrinted == columns) {
+                    Console.Write("\n");
+                    columnsPrinted = 0;
+                }
+            }
+            Console.WriteLine("");
+        }
+
         private T[] Vehicles {
             get => _vehicles;
             set => _vehicles = value;
