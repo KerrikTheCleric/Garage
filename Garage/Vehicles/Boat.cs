@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 
 namespace GarageTask.Vehicles {
     internal class Boat : Vehicle {
-        public Boat(string registrationNumber, Colour colour, double cargoSpace, double weight, int topSpeed, int wheels = 0) : base(registrationNumber, colour, cargoSpace, weight, topSpeed, wheels) {
+        public Boat(string registrationNumber, Colour colour, double cargoSpace, double weight, int topSpeed, bool hasSail, int wheels = 0) : base(registrationNumber, colour, cargoSpace, weight, topSpeed, wheels) {
+            HasSail = hasSail;
         }
+
+        private bool HasSail { get; set; }
     }
 }
