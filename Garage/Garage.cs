@@ -33,7 +33,6 @@ namespace GarageTask {
                     return true;
                 }
             }
-
             return false;
         }
 
@@ -43,7 +42,7 @@ namespace GarageTask {
             int spacesPrinted = 0;
 
             foreach (IVehicle v in this) {
-                Console.Write($"{spacesPrinted}. [V] ");
+                Console.Write($"{spacesPrinted + 1}. [V] ");
                 columnsPrinted++;
                 spacesPrinted++;
 
@@ -54,7 +53,7 @@ namespace GarageTask {
             }
 
             for (int i = 0; i < RemainingGarageSpaces; i++) {
-                Console.Write($"{spacesPrinted}. [ ] ");
+                Console.Write($"{spacesPrinted + 1}. [ ] ");
                 columnsPrinted++;
                 spacesPrinted++;
 

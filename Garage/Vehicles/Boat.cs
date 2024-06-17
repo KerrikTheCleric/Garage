@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GarageTask.Vehicles
-{
-    internal class Boat : Vehicle   
-    {
+namespace GarageTask.Vehicles {
+    internal class Boat : Vehicle {
+        public Boat(string registrationNumber, Colour colour, double cargoSpace, double weight, int topSpeed, int wheels = 0) : base(registrationNumber, colour, cargoSpace, weight, topSpeed, wheels) {
+        }
     }
 }

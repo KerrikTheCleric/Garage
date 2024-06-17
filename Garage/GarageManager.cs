@@ -4,9 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GarageTask.Vehicles {
-    internal interface IVehicle {
-
-        public string GetRegistrationNumber();
+namespace Garage {
+    internal class GarageManager {
     }
 }
