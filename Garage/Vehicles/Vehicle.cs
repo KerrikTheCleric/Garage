@@ -36,10 +36,6 @@ namespace GarageTask.Vehicles {
             }
         }
 
-        public string GetRegistrationNumber() {
-            return RegistrationNumber;
-        }
-
         private Colour Colour { get; set; }
 
         private double CargoSpace { get; set; }
@@ -49,6 +45,30 @@ namespace GarageTask.Vehicles {
         private int TopSpeed { get; set; }
 
         private int Wheels { get; set; }
+
+        public string GetRegistrationNumber() {
+            return RegistrationNumber;
+        }
+
+        public Colour GetColour() {
+            return Colour;
+        }
+
+        public double GetCargoSpace() {
+            return CargoSpace;
+        }
+
+        public double GetWeight() {
+            return Weight;
+        }
+
+        public int GetTopSpeed() {
+            return TopSpeed;
+        }
+
+        public int GetWheels() {
+            return Wheels;
+        }
 
     }
 }

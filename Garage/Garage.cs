@@ -29,7 +29,9 @@ namespace GarageTask {
             for (int i = 0; i < Vehicles.Length; ++i) {
                 if (Vehicles[i] == null) {
                     Vehicles[i] = (T)newVehicle;
-                    RemainingGarageSpaces = RemainingGarageSpaces--;
+
+                    RemainingGarageSpaces--;
+
                     return true;
                 }
             }

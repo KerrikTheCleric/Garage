@@ -8,7 +8,7 @@ namespace GarageTask {
                 Airplane a1 = new Airplane("TBA555", Colour.Yellow, 0.0, 0.0, 0, 8);
                 Motorcycle m1 = new Motorcycle("KLG899", Colour.Purple, 0.0, 0.0, 0);
 
-                Garage<IVehicle> garage = new Garage<IVehicle>(3);
+                Garage<IVehicle> garage = new Garage<IVehicle>(15);
 
                 garage.AddVehicle(b1);
                 garage.AddVehicle(a1);
