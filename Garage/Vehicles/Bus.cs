@@ -6,10 +6,12 @@ using System.Threading.Tasks;
 
 namespace GarageTask.Vehicles {
     internal class Bus : Vehicle {
-        public Bus(string registrationNumber, Colour colour, double cargoSpace, double weight, int topSpeed, bool doubleDecker, int wheels = 6) : base(registrationNumber, colour, cargoSpace, weight, topSpeed, wheels) {
-            DoubleDecker = doubleDecker;
+        public Bus(string registrationNumber, Colour colour, double cargoSpace, double weight, int topSpeed, bool isDoubleDecker, int wheels = 6) : base(registrationNumber, colour, cargoSpace, weight, topSpeed, wheels) {
+            IsDoubleDecker = isDoubleDecker;
         }
 
-        private bool DoubleDecker { set; get; }
+        private bool IsDoubleDecker { set; get; }
+
+        public bool GetIsDoubleDecker() { return IsDoubleDecker; }
     }
 }

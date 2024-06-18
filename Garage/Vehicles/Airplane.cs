@@ -12,5 +12,7 @@ namespace GarageTask.Vehicles {
         }
 
         private char FlightClass { get; set; }
+
+        public char GetFlightClass() { return FlightClass; }
     }
 }

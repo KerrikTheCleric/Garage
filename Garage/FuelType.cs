@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Garage {
-    internal enum Fuel {
+    internal enum FuelType {
         Gasoline,
         Diesel
     }

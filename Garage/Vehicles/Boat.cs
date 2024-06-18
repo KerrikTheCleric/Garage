@@ -11,5 +11,7 @@ namespace GarageTask.Vehicles {
         }
 
         private bool HasSail { get; set; }
+
+        public bool GetHasSail() { return HasSail; }
     }
 }

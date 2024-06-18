@@ -7,10 +7,12 @@ using System.Threading.Tasks;
 namespace GarageTask.Vehicles
 {
     internal class Motorcycle : Vehicle {
-        public Motorcycle(string registrationNumber, Colour colour, double cargoSpace, double weight, int topSpeed, bool withCarriage, int wheels = 2) : base(registrationNumber, colour, cargoSpace, weight, topSpeed, wheels) {
-            WithCarriage = withCarriage;
+        public Motorcycle(string registrationNumber, Colour colour, double cargoSpace, double weight, int topSpeed, bool hasCarriage, int wheels = 2) : base(registrationNumber, colour, cargoSpace, weight, topSpeed, wheels) {
+            HasCarriage = hasCarriage;
         }
 
-        private bool WithCarriage { get; set; }
+        private bool HasCarriage { get; set; }
+
+        public bool GetHasCarriage() { return HasCarriage; }
     }
 }

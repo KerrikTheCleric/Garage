@@ -3,6 +3,13 @@ using GarageTask.Vehicles;
 using System.Resources;
 using System.Text.Json;
 
+/*
+ 
+ 1. Remove JSON File
+ 2. Make printing columns into a constant
+ 
+ */
+
 namespace GarageTask {
     internal class Program {
         static void Main(string[] args) {
@@ -16,14 +23,11 @@ namespace GarageTask {
                 Console.WriteLine("Error: " + e.Message);
             }*/
 
-            //string jsonString = File.ReadAllText("Resources\\starter_vehicles.json");
-            //Airplane a = JsonSerializer.Deserialize<Airplane>(jsonString);
-
 
             try {
                 Boat b1 = new Boat("aBa123", Colour.Orange, 400.6, 2320.8, 60, true);
                 Airplane a1 = new Airplane("TBA555", Colour.Yellow, 0.0, 0.0, 0, 'B',8);
-                Motorcycle m1 = new Motorcycle("KLG899", Colour.Purple, 0.0, 0.0, 0, false);
+                Motorcycle m1 = new Motorcycle("KLG899", Colour.Purple, 0.0, 0.0, 0, true);
 
                 Garage<IVehicle> garage = new Garage<IVehicle>(45);
 
@@ -39,7 +43,7 @@ namespace GarageTask {
 
                 garage.PrintGarage(10);
 
-                IVehicle result = garage.FindVehicleAtSpotNumber(44);
+                IVehicle result = garage.FindVehicleAtSpotNumber(2);
 
                 Console.WriteLine(result.GetRegistrationNumber());
                 Console.WriteLine(result.GetType());
@@ -48,7 +52,8 @@ namespace GarageTask {
                 switch (result.GetType().Name) {
 
                     case "Motorcycle":
-                        Console.WriteLine("Is a motorcycle!");
+                        Motorcycle m = (Motorcycle)result;
+                        Console.WriteLine("Is a motorcycle! Has carriage: " + m.GetHasCarriage());
                         break;
                     default:
                         break;
