@@ -30,6 +30,8 @@ namespace Garage {
 
             // Print Empty Garage
 
+            uI.PrintGarage(gHandler.GetArrayOfVehicles(), gHandler.GetTotalGarageSpaces());
+
             // Ask to populate garage with old vehicles
         }
     }

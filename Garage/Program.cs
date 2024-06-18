@@ -12,7 +12,8 @@ using System.Text.Json;
  2. Make printing columns into a constant
  3. Move functionality from Garage to GarageHandler?
  4. Match interfaces with implementations.
- 5. Print garage using colours.
+ 5. Print garage using colours?
+ 6. Swap properties for standard fields.
  
  */
 

@@ -10,5 +10,7 @@ namespace Garage.Interfaces {
         public void DisplayError(string error);
 
         public int AskGarageSize();
+
+        public void PrintGarage(IVehicle[] vehicles, int totalGarageSpaces);
     }
 }

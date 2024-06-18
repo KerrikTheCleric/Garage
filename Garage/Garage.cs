@@ -8,38 +8,38 @@ using System.Threading.Tasks;
 
 namespace GarageTask
 {
-    internal class Garage<T> :IGarage, IEnumerable<T> where T : IVehicle {
+    internal class Garage<T> : IGarage<T>, IEnumerable<T> where T : IVehicle {
         private T[] _vehicles;
+        private int _totalGarageSpaces;
+        private int _remainingGarageSpaces;
 
 
         public Garage(int size) {
             _vehicles = new T[size];
-            Vehicles = _vehicles;
-            TotalGarageSpaces = size;
-            RemainingGarageSpaces = size;
+            _totalGarageSpaces = size;
+            _remainingGarageSpaces = size;
         }
 
-        private T[] Vehicles {
-            get => _vehicles;
-            set => _vehicles = value;
+        public T[] GetVehicleArray<T2>() {
+            return _vehicles.ToArray();
         }
 
-        private int TotalGarageSpaces { get; set; }
+        public int GetTotalGarageSpaces() {
+            return _totalGarageSpaces;
+        }
 
-        private int RemainingGarageSpaces { get; set; }
+        public int AddVehicle(T newVehicle) {
 
-        public int AddVehicle(IVehicle newVehicle) {
-
-            if (RemainingGarageSpaces == 0) {
+            if (_remainingGarageSpaces == 0) {
                 return 1;
             }
 
             int freeSpace = -1;
 
-            for (int i = 0; i < Vehicles.Length; ++i) {
+            for (int i = 0; i < _vehicles.Length; ++i) {
 
-                if (Vehicles[i] != null) {
-                    if (newVehicle.GetRegistrationNumber() == Vehicles[i].GetRegistrationNumber()) {
+                if (_vehicles[i] != null) {
+                    if (newVehicle.GetRegistrationNumber() == _vehicles[i].GetRegistrationNumber()) {
                         return 2;
                     }
                 } else if (freeSpace == -1) {
@@ -47,8 +47,8 @@ namespace GarageTask
                 }
             }
 
-            Vehicles[freeSpace] = (T)newVehicle;
-            RemainingGarageSpaces--;
+            _vehicles[freeSpace] = (T)newVehicle;
+            _remainingGarageSpaces--;
             return 0;
         }
 
@@ -58,65 +58,17 @@ namespace GarageTask
 
         public IVehicle FindVehicleAtSpotNumber(int index) {
 
-            if (TotalGarageSpaces > index && index >= 0) {
-                return Vehicles[index];
+            if (_totalGarageSpaces > index && index >= 0) {
+                return _vehicles[index];
             }
             return null;
         }
 
         // FindVehicleWithRegistrationNumber
 
-        // Move to UI
-
-        public void PrintGarage(int columns) {
-
-            int columnsPrinted = 0;
-            int spacesPrinted = 0;
-
-            for (int i = 0; i < TotalGarageSpaces; i++) {
-                if (Vehicles[i] == null) {
-                    Console.Write($"{spacesPrinted + 1}. [ ] ");
-                } else {
-                    Console.Write($"{spacesPrinted + 1}. [V] ");
-                }
-                columnsPrinted++;
-                spacesPrinted++;
-
-                if (columnsPrinted == columns) {
-                    Console.Write("\n");
-                    columnsPrinted = 0;
-                }
-            }
-
-
-            /*foreach (IVehicle v in this) {
-                Console.Write($"{spacesPrinted + 1}. [V] ");
-                columnsPrinted++;
-                spacesPrinted++;
-
-                if (columnsPrinted == columns) {
-                    Console.Write("\n");
-                    columnsPrinted = 0;
-                }
-            }
-
-            for (int i = 0; i < RemainingGarageSpaces; i++) {
-                Console.Write($"{spacesPrinted + 1}. [ ] ");
-                columnsPrinted++;
-                spacesPrinted++;
-
-
-                if (columnsPrinted == columns) {
-                    Console.Write("\n");
-                    columnsPrinted = 0;
-                }
-            }*/
-            Console.WriteLine("");
-        }
-
         public IEnumerator<T> GetEnumerator() {
-            for (int i = 0; i < Vehicles.Length; ++i) {
-                if (Vehicles[i] != null) {
+            for (int i = 0; i < _vehicles.Length; ++i) {
+                if (_vehicles[i] != null) {
                     yield return _vehicles[i];
                 }
             }
@@ -125,5 +77,7 @@ namespace GarageTask
         IEnumerator IEnumerable.GetEnumerator() {
             return GetEnumerator();
         }
+
+        
     }
 }

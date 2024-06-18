@@ -12,12 +12,19 @@ namespace GarageTask {
 
     internal class GarageHandler : IGarageHandler {
 
-        IGarage _garage;
+        IGarage<IVehicle> _garage;
 
         public GarageHandler(int garageSize) {
             Garage = new Garage<IVehicle>(garageSize);
         }
 
-        private IGarage Garage { get => _garage; set => _garage = value; }
+        private IGarage<IVehicle> Garage { get => _garage; set => _garage = value; }
+
+        public IVehicle[] GetArrayOfVehicles() {
+            return Garage.GetVehicleArray<IVehicle>();
+        }
+        public int GetTotalGarageSpaces() {
+            return _garage.GetTotalGarageSpaces();
+        }
     }
 }

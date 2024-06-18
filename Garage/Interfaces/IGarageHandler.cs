@@ -6,5 +6,10 @@ using System.Threading.Tasks;
 
 namespace Garage.Interfaces {
     internal interface IGarageHandler {
+
+
+        public IVehicle[] GetArrayOfVehicles();
+
+        public int GetTotalGarageSpaces();
     }
 }
