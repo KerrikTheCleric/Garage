@@ -14,6 +14,7 @@ using System.Text.Json;
  4. Match interfaces with implementations.
  5. Print garage using colours?
  6. Swap properties for standard fields.
+ 7. Decide on how to balance custom errors versus exceptions.
  
  */
 

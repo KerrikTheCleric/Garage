@@ -10,12 +10,23 @@ using System.Threading.Tasks;
 namespace Garage {
     internal class UI : IUI {
 
+        public char YorN() {
+            while (true) {
+                char input = char.ToUpper(Console.ReadKey().KeyChar);
+
+                if (input == 'Y' || input == 'N') {
+                    Console.WriteLine();
+                    return input;
+                }
+                Console.Write("\b \b"); // Use backspace ('\b') to erase the incorrect character.
+            }
+        }
+
         public void DisplayError(string error) {
             Console.WriteLine("Error: " + error);
         }
 
         public int AskGarageSize() {
-
             Console.WriteLine("Initializing new garage. Input the maximum amount of vehicles desired below:\n");
             int parsedResult = int.TryParse(Console.ReadLine(), out parsedResult) ? parsedResult : -1;
             return parsedResult;
@@ -40,31 +51,17 @@ namespace Garage {
                     columnsPrinted = 0;
                 }
             }
-
-
-            /*foreach (IVehicle v in this) {
-                Console.Write($"{spacesPrinted + 1}. [V] ");
-                columnsPrinted++;
-                spacesPrinted++;
-
-                if (columnsPrinted == columns) {
-                    Console.Write("\n");
-                    columnsPrinted = 0;
-                }
-            }
-
-            for (int i = 0; i < RemainingGarageSpaces; i++) {
-                Console.Write($"{spacesPrinted + 1}. [ ] ");
-                columnsPrinted++;
-                spacesPrinted++;
-
-
-                if (columnsPrinted == columns) {
-                    Console.Write("\n");
-                    columnsPrinted = 0;
-                }
-            }*/
             Console.WriteLine("");
+        }
+
+        public bool AskIfGarageShouldBePrefilled() {
+            Console.WriteLine("Would you like to fill up the garage with already existing vehicles, Y/N?:\n");
+
+            if (YorN() == 'Y') {
+                return true;
+            } else {
+                return false;
+            }
         }
     }
 }
