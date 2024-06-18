@@ -1,22 +1,11 @@
 {
-  "vehicle": {
-    "title": "example glossary",
-    "GlossDiv": {
-      "title": "S",
-      "GlossList": {
-        "GlossEntry": {
-          "ID": "SGML",
-          "SortAs": "SGML",
-          "GlossTerm": "Standard Generalized Markup Language",
-          "Acronym": "SGML",
-          "Abbrev": "ISO 8879:1986",
-          "GlossDef": {
-            "para": "A meta-markup language, used to create markup languages such as DocBook.",
-            "GlossSeeAlso": [ "GML", "XML" ]
-          },
-          "GlossSee": "markup"
-        }
-      }
-    }
+  "airplane": {
+    "registrationNumber": "GHT884",
+    "colour": "Gold",
+    "cargoSpace": 55.7,
+    "weight": 1237.6,
+    "topSpeed": 55,
+    "flightClass": "B",
+    "wheels": 8
   }
-}
+} 
