@@ -22,16 +22,16 @@ namespace GarageTask
         static void Main(string[] args) {
 
 
-            /*GarageManager gManager = new GarageManager();
+            GarageManager gManager = new GarageManager();
 
             try {
                 gManager.StartProgram();
             } catch (Exception e) {
                 Console.WriteLine("Error: " + e.Message);
-            }*/
+            }
 
 
-            try {
+            /*try {
                 Boat b1 = new Boat("aBa123", Colour.Orange, 400.6, 2320.8, 60, true);
                 Airplane a1 = new Airplane("TBA555", Colour.Yellow, 0.0, 0.0, 0, 'B',8);
                 Motorcycle m1 = new Motorcycle("KLG899", Colour.Purple, 0.0, 0.0, 0, true);
@@ -69,13 +69,7 @@ namespace GarageTask
 
             } catch (Exception e) {
                 Console.WriteLine("Error: " + e.Message);
-            }
-            
-
-
-            
-
-            
+            }*/
 
         }
     }
