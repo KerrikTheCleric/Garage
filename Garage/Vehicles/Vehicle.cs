@@ -1,11 +1,14 @@
-﻿using Garage.Errors;
+﻿using Garage.Enums;
+using Garage.Errors;
+using Garage.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GarageTask.Vehicles {
+namespace GarageTask.Vehicles
+{
     internal class Vehicle : IVehicle {
         private string? _registrationNumber;
 

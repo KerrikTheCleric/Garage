@@ -1,4 +1,4 @@
-﻿using GarageTask.Vehicles;
+﻿using Garage.Interfaces;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -6,8 +6,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GarageTask {
-    internal class Garage<T> : IEnumerable<T> where T : IVehicle {
+namespace GarageTask
+{
+    internal class Garage<T> :IGarage, IEnumerable<T> where T : IVehicle {
         private T[] _vehicles;
 
 

@@ -4,8 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GarageTask {
-    internal enum Colour {
+namespace Garage.Enums
+{
+    internal enum Colour
+    {
         Blue,
         Green,
         Orange,

@@ -3,9 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Garage.Enums;
 
-namespace GarageTask.Vehicles {
-    internal interface IVehicle {
+namespace Garage.Interfaces
+{
+    internal interface IVehicle
+    {
 
         public string GetRegistrationNumber();
 

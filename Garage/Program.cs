@@ -1,16 +1,23 @@
 ﻿using Garage;
+using Garage.Enums;
+using Garage.Interfaces;
 using GarageTask.Vehicles;
 using System.Resources;
 using System.Text.Json;
 
 /*
- 
+ TODO:
+
  1. Remove JSON File
  2. Make printing columns into a constant
+ 3. Move functionality from Garage to GarageHandler?
+ 4. Match interfaces with implementations.
+ 5. Print garage using colours.
  
  */
 
-namespace GarageTask {
+namespace GarageTask
+{
     internal class Program {
         static void Main(string[] args) {
 

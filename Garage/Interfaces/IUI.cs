@@ -4,9 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Garage {
-    internal enum FuelType {
-        Gasoline,
-        Diesel
+namespace Garage.Interfaces {
+    internal interface IUI {
     }
 }
