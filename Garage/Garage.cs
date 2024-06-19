@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -26,6 +27,10 @@ namespace GarageTask
 
         public int GetTotalGarageSpaces() {
             return _totalGarageSpaces;
+        }
+
+        public int GetRemainingGarageSpaces() {
+            return _remainingGarageSpaces;
         }
 
         public int AddVehicle(T newVehicle) {
@@ -52,9 +57,30 @@ namespace GarageTask
             return 0;
         }
 
-        // RemoveVehicleAtSpotNumber
+        public bool RemoveVehicleAtSpotNumber(int index) {
+            if (_vehicles[index] != null) {
+                _vehicles[index] = default(T);
+                _remainingGarageSpaces++;
+                return true;
+            } else {
+                return false;
+            }
+        }
 
-        // RemoveVehicleWithRegistrationNumber
+        public bool RemoveVehicleWithRegistrationNumber(string regNumber) {
+
+            for (int i = 0; i < _vehicles.Length; ++i) {
+
+                if (_vehicles[i] != null) {
+                    if (regNumber == _vehicles[i].GetRegistrationNumber()) {
+                        _vehicles[i] = default(T);
+                        _remainingGarageSpaces++;
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
 
         public T FindVehicleAtSpotNumber(int index) {
             if (_totalGarageSpaces > index && index >= 0) {

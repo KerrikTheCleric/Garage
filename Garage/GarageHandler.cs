@@ -1,4 +1,5 @@
-﻿using Garage.Errors;
+﻿using Garage;
+using Garage.Errors;
 using Garage.Interfaces;
 using GarageTask.Vehicles;
 using System;
@@ -34,6 +35,10 @@ namespace GarageTask {
             return _garage.GetTotalGarageSpaces();
         }
 
+        public int GetRemainingGarageSpaces() {
+            return _garage.GetRemainingGarageSpaces();
+        }
+
         public void AddVehicleToGarage(IVehicle vehicle) {
 
             switch (_garage.AddVehicle(vehicle)) {
@@ -45,6 +50,14 @@ namespace GarageTask {
                     break;
             }
 
+        }
+
+        public bool RemoveVehicleAtSpotNumber(int index) {
+            return _garage.RemoveVehicleAtSpotNumber(index);
+        }
+
+        public bool RemoveVehicleWithRegistrationNumber(string regNumber) {
+            return _garage.RemoveVehicleWithRegistrationNumber(regNumber);
         }
 
         public IVehicle FindVehicleAtSpotNumber(int index) {

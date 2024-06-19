@@ -36,6 +36,8 @@ namespace Garage.Interfaces {
 
         public int AskForMethodOfSearchingVehicle();
 
+        public int AskForMethodOfRemovingVehicle();
+
         public int AskForParkingNumber(int totalGarageSpaces);
 
         public string AskForRegistrationNumber();
@@ -65,5 +67,9 @@ namespace Garage.Interfaces {
         public bool AskForHasCarriage();
 
         public void PrintAddVehicleSuccessMessage();
+
+        public void PrintRemoveVehicleSuccessMessage(bool parkingSpotRemoval);
+
+        public void PrintRemoveVehicleFailureMessage(bool parkingSpotRemoval);
     }
 }

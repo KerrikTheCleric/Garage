@@ -56,6 +56,7 @@ namespace Garage {
                         AddVehicle();
                         break;
                     case 5:
+                        RemoveVehicle();
                         break;
                     case 6:
                         break;
@@ -122,36 +123,19 @@ namespace Garage {
         }
 
         private void AddVehicle() {
-            // Ask for type
+
+            if (gHandler.GetRemainingGarageSpaces() == 0) {
+                uI.DisplayError(new GarageFullError().UEMessage());
+                return;
+            }
 
             string type = uI.AskForType();
-
-            // Ask For RegistrationNumber
-
             string regNumber = uI.AskForRegistrationNumber();
-
-            // Ask for Colour
-
             Colour colour = uI.AskForColour();
-
-            // Ask for Cargo Space
-
             double cargoSpace = uI.AskForCargoSpace();
-
-            // Ask for Weight
-
             double weight = uI.AskForWeight();
-
-            // Ask for TopSpeed
-
             int topSpeed = uI.AskForTopSpeed();
-
-            // Ask for Wheels
-
             int wheels = uI.AskForWheels();
-
-            // Switch case on type, ask for specific value
-
             IVehicle v;
 
             switch (type) {
@@ -217,12 +201,32 @@ namespace Garage {
                 default:
                     break;
             }
-
             uI.PrintAddVehicleSuccessMessage();
+        }
 
-            // Create Vehicle and add it to the garage
+        private void RemoveVehicle() {
+         
+                switch (uI.AskForMethodOfRemovingVehicle()) {
+                case 1:
+                    uI.PrintGarage(gHandler.GetArrayOfVehiclesAndEmptySpots(), gHandler.GetTotalGarageSpaces());
 
-            
+                    if (gHandler.RemoveVehicleAtSpotNumber(uI.AskForParkingNumber(gHandler.GetTotalGarageSpaces()))) {
+                        uI.PrintRemoveVehicleSuccessMessage(parkingSpotRemoval: true);
+                    } else {
+                        uI.PrintRemoveVehicleFailureMessage(parkingSpotRemoval: true);
+                    }
+                    break;
+                case 2:
+                    if (gHandler.RemoveVehicleWithRegistrationNumber(uI.AskForRegistrationNumber())) {
+                        uI.PrintRemoveVehicleSuccessMessage(parkingSpotRemoval: false);
+                    } else {
+                        uI.PrintRemoveVehicleFailureMessage(parkingSpotRemoval: false);
+                    }
+
+                    break;
+                default:
+                    break;
+            }
         }
 
         private void PopulateGarage() {

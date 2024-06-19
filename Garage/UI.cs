@@ -130,7 +130,7 @@ namespace Garage {
             Console.WriteLine("2) Display All Vehicles");
             Console.WriteLine("3) Vehicle Types");
             Console.WriteLine("4) Add Vehicle");
-            Console.WriteLine("5) Nothing");
+            Console.WriteLine("5) Remove Vehicle");
             Console.WriteLine("6) Nothing");
             Console.WriteLine("7) Nothing");
             Console.WriteLine("8) Nothing");
@@ -229,6 +229,20 @@ namespace Garage {
             int parsedResult = int.TryParse(Console.ReadLine(), out parsedResult) ? parsedResult : -1;
 
             while (parsedResult != 1 && parsedResult != 2 ) {
+                DisplayError(new OneOrTwoError().UEMessage());
+                parsedResult = int.TryParse(Console.ReadLine(), out parsedResult) ? parsedResult : -1;
+            }
+            Console.WriteLine("");
+            return parsedResult;
+        }
+
+        public int AskForMethodOfRemovingVehicle() {
+            Console.WriteLine("How do you wish to remove the vehicle?\n");
+            Console.WriteLine("1) Parking Number");
+            Console.WriteLine("2) Registration Number\n");
+            int parsedResult = int.TryParse(Console.ReadLine(), out parsedResult) ? parsedResult : -1;
+
+            while (parsedResult != 1 && parsedResult != 2) {
                 DisplayError(new OneOrTwoError().UEMessage());
                 parsedResult = int.TryParse(Console.ReadLine(), out parsedResult) ? parsedResult : -1;
             }
@@ -492,7 +506,25 @@ namespace Garage {
         }
 
         public void PrintAddVehicleSuccessMessage() {
-            Console.WriteLine("==New vehicle successfully added to garage.==\n");
+            Console.WriteLine("New vehicle successfully added to garage.\n");
+        }
+
+        public void PrintRemoveVehicleSuccessMessage(bool parkingSpotRemoval) {
+            if (parkingSpotRemoval) {
+                Console.WriteLine("Vehicle found at selected parking spot and removed.");
+            } else {
+                Console.WriteLine("Vehicle with inputted registration number found and removed.");
+            }
+            Console.WriteLine("");
+        }
+
+        public void PrintRemoveVehicleFailureMessage(bool parkingSpotRemoval) {
+            if (parkingSpotRemoval) {
+                Console.WriteLine("No vehicle found at selected parking spot. Removal unsuccessful.");
+            } else {
+                Console.WriteLine("No vehicle with inputted registration number found. Removal unsuccessful.");
+            }
+            Console.WriteLine("");
         }
     }
 }

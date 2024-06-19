@@ -15,7 +15,13 @@ namespace Garage.Interfaces {
 
         public int GetTotalGarageSpaces();
 
+        public int GetRemainingGarageSpaces();
+
         public void AddVehicleToGarage(IVehicle vehicle);
+
+        public bool RemoveVehicleAtSpotNumber(int index);
+
+        public bool RemoveVehicleWithRegistrationNumber(string regNumber);
 
         public IVehicle FindVehicleAtSpotNumber(int index);
 
