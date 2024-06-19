@@ -65,8 +65,6 @@ namespace GarageTask
 
         public T FindVehicleWithRegistrationNumber(string regNumber) {
 
-
-
             for (int i = 0; i < _vehicles.Length; ++i) {
 
                 if (_vehicles[i] != null) {

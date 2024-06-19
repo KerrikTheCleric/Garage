@@ -53,6 +53,7 @@ namespace Garage {
                         DisplayVehicleTypes();
                         break;
                     case 4:
+                        AddVehicle();
                         break;
                     case 5:
                         break;
@@ -113,13 +114,115 @@ namespace Garage {
         }
 
         private void DisplayVehicleTypes() {
-            //IVehicle[] vehicleArray = gHandler.GetArrayOfVehicles();
-
             List<string> listOfTypes = gHandler.CollectAllVehicleTypes();
 
             foreach (string type in listOfTypes) {
                 uI.PrintVehicleTypeCount(type, gHandler.CountVehiclesOfType(type));
             }
+        }
+
+        private void AddVehicle() {
+            // Ask for type
+
+            string type = uI.AskForType();
+
+            // Ask For RegistrationNumber
+
+            string regNumber = uI.AskForRegistrationNumber();
+
+            // Ask for Colour
+
+            Colour colour = uI.AskForColour();
+
+            // Ask for Cargo Space
+
+            double cargoSpace = uI.AskForCargoSpace();
+
+            // Ask for Weight
+
+            double weight = uI.AskForWeight();
+
+            // Ask for TopSpeed
+
+            int topSpeed = uI.AskForTopSpeed();
+
+            // Ask for Wheels
+
+            int wheels = uI.AskForWheels();
+
+            // Switch case on type, ask for specific value
+
+            IVehicle v;
+
+            switch (type) {
+                case "Airplane":
+                    char flightClass = uI.AskForFlightClass();
+                    v = new Airplane(regNumber, colour, cargoSpace, weight, topSpeed, flightClass, wheels);
+
+                    try {
+                        gHandler.AddVehicleToGarage(v);
+                    } catch (Exception e) {
+                        uI.DisplayError(e.Message);
+                    }
+                    break;
+                case "Boat":
+                    bool hasSail = uI.AskForHasSail();
+                    v = new Boat(regNumber, colour, cargoSpace, weight, topSpeed, hasSail, wheels);
+
+                    try {
+                        gHandler.AddVehicleToGarage(v);
+                    } catch (Exception e) {
+                        uI.DisplayError(e.Message);
+                    }
+                    break;
+                case "Bus":
+                    bool isDoubleDecker = uI.AskForIsDoubleDecker();
+                    v = new Bus(regNumber, colour, cargoSpace, weight, topSpeed, isDoubleDecker, wheels);
+
+                    try {
+                        gHandler.AddVehicleToGarage(v);
+                    } catch (Exception e) {
+                        uI.DisplayError(e.Message);
+                    }
+                    break;
+                case "Car":
+                    FuelType fueltype = uI.AskForFuelType();
+                    v = new Car(regNumber, colour, cargoSpace, weight, topSpeed, fueltype, wheels);
+
+                    try {
+                        gHandler.AddVehicleToGarage(v);
+                    } catch (Exception e) {
+                        uI.DisplayError(e.Message);
+                    }
+                    break;
+                case "Motorcycle":
+                    bool hasCarriage = uI.AskForHasCarriage();
+                    v = new Motorcycle(regNumber, colour, cargoSpace, weight, topSpeed, hasCarriage, wheels);
+
+                    try {
+                        gHandler.AddVehicleToGarage(v);
+                    } catch (Exception e) {
+                        uI.DisplayError(e.Message);
+                    }
+                    break;
+                case "Vehicle":
+                    v = new Vehicle(regNumber, colour, cargoSpace, weight, topSpeed, wheels);
+
+                    try {
+                        gHandler.AddVehicleToGarage(v);
+                    } catch (Exception e) {
+                        uI.DisplayError(e.Message);
+                    }
+                    break;
+                default:
+                    break;
+            }
+
+            uI.PrintAddVehicleSuccessMessage();
+
+            // Create Vehicle and add it to the garage
+
+            
         }
 
         private void PopulateGarage() {

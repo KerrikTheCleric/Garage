@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Garage.Enums;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -40,5 +41,29 @@ namespace Garage.Interfaces {
         public string AskForRegistrationNumber();
 
         public void PrintVehicleTypeCount(string type, int count);
+
+        public string AskForType();
+
+        public Colour AskForColour();
+
+        public double AskForCargoSpace();
+
+        public double AskForWeight();
+
+        public int AskForTopSpeed();
+
+        public int AskForWheels();
+
+        public char AskForFlightClass();
+
+        public bool AskForHasSail();
+
+        public bool AskForIsDoubleDecker();
+
+        public FuelType AskForFuelType();
+
+        public bool AskForHasCarriage();
+
+        public void PrintAddVehicleSuccessMessage();
     }
 }

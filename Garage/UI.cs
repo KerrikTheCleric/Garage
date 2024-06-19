@@ -1,10 +1,14 @@
-﻿using Garage.Errors;
+﻿using Garage.Enums;
+using Garage.Errors;
 using Garage.Interfaces;
 using Garage.Resources;
 using GarageTask.Vehicles;
 using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
+using System.Net.NetworkInformation;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -19,7 +23,7 @@ namespace Garage {
                     Console.WriteLine();
                     return input;
                 }
-                Console.Write("\b \b"); // Use backspace ('\b') to erase the incorrect character.
+                Console.Write("\b \b");
             }
         }
 
@@ -125,7 +129,7 @@ namespace Garage {
             Console.WriteLine("1) Display Vehicle");
             Console.WriteLine("2) Display All Vehicles");
             Console.WriteLine("3) Vehicle Types");
-            Console.WriteLine("4) Nothing");
+            Console.WriteLine("4) Add Vehicle");
             Console.WriteLine("5) Nothing");
             Console.WriteLine("6) Nothing");
             Console.WriteLine("7) Nothing");
@@ -225,7 +229,7 @@ namespace Garage {
             int parsedResult = int.TryParse(Console.ReadLine(), out parsedResult) ? parsedResult : -1;
 
             while (parsedResult != 1 && parsedResult != 2 ) {
-                DisplayError(new DisplayVehicleMenuError().UEMessage());
+                DisplayError(new OneOrTwoError().UEMessage());
                 parsedResult = int.TryParse(Console.ReadLine(), out parsedResult) ? parsedResult : -1;
             }
             Console.WriteLine("");
@@ -261,6 +265,234 @@ namespace Garage {
 
         public void PrintVehicleTypeCount(string type, int count) {
             Console.WriteLine($"{type}: {count}");
+        }
+
+        public string AskForType() {
+            Console.WriteLine("What type of vehicle is it? Select \"Vehicle\" if nothing matches.\n");
+            Console.WriteLine("1) Airplane");
+            Console.WriteLine("2) Boat");
+            Console.WriteLine("3) Bus");
+            Console.WriteLine("4) Car");
+            Console.WriteLine("5) Motorcycle");
+            Console.WriteLine("6) Vehicle");
+
+
+            int parsedResult = int.TryParse(Console.ReadLine(), out parsedResult) ? parsedResult : -1;
+
+            while (!Enumerable.Range(1, 6).Contains(parsedResult)) {
+                Console.WriteLine($"Please pick a type by inputting a number from 1 through 6.\n");
+                parsedResult = int.TryParse(Console.ReadLine(), out parsedResult) ? parsedResult : -1;
+            }
+            Console.WriteLine("");
+
+            switch (parsedResult) {
+                case 1:
+                    return "Airplane";
+                case 2:
+                    return "Boat";
+                case 3:
+                    return "Bus";
+                case 4:
+                    return "Car";
+                case 5:
+                    return "Motorcycle";
+                case 6:
+                    return "Vehicle";
+                default:
+                    return "";
+            }
+        }
+
+        public Colour AskForColour() {
+
+            Console.WriteLine("What colour is the vehicle?\n");
+            Console.WriteLine("1) Blue");
+            Console.WriteLine("2) Green");
+            Console.WriteLine("3) Orange");
+            Console.WriteLine("4) Yellow");
+            Console.WriteLine("5) Purple");
+            Console.WriteLine("6) Brown");
+            Console.WriteLine("7) Gray");
+            Console.WriteLine("8) Red");
+            Console.WriteLine("9) Pink");
+            Console.WriteLine("10) White");
+            Console.WriteLine("11) Black");
+            Console.WriteLine("12) Gold");
+
+            int parsedResult = int.TryParse(Console.ReadLine(), out parsedResult) ? parsedResult : -1;
+
+            while (!Enumerable.Range(1, 12).Contains(parsedResult)) {
+                Console.WriteLine($"Please pick a colour by inputting a number from 1 through 12.\n");
+                parsedResult = int.TryParse(Console.ReadLine(), out parsedResult) ? parsedResult : -1;
+            }
+            Console.WriteLine("");
+
+            switch (parsedResult) {
+                case 1:
+                    return Colour.Blue;
+                case 2:
+                    return Colour.Green;
+                case 3:
+                    return Colour.Orange;
+                case 4:
+                    return Colour.Yellow;
+                case 5:
+                    return Colour.Purple;
+                case 6:
+                    return Colour.Brown;
+                case 7:
+                    return Colour.Gray;
+                case 8:
+                    return Colour.Red;
+                case 9:
+                    return Colour.Pink;
+                case 10:
+                    return Colour.White;
+                case 11:
+                    return Colour.Black;
+                case 12:
+                    return Colour.Gold;
+                default:
+                    return Colour.White;
+            }
+        }
+
+        public double AskForCargoSpace() {
+            Console.WriteLine($"Please input the cargo space of the vehicle in cubic meters. Decimal numbers are allowed.");
+
+            double parsedResult = double.TryParse(Console.ReadLine(), out parsedResult) ? parsedResult : -1;
+
+            while (parsedResult < 0) {
+                Console.WriteLine($"Please input the cargo space of the vehicle in cubic meters. Decimal numbers are allowed.");
+                parsedResult = double.TryParse(Console.ReadLine(), out parsedResult) ? parsedResult : -1;
+            }
+            Console.WriteLine("");
+            return parsedResult;
+        }
+
+        public double AskForWeight() {
+            Console.WriteLine($"Please input the weight of the vehicle in Kg. Decimal numbers are allowed.");
+
+            double parsedResult = double.TryParse(Console.ReadLine(), out parsedResult) ? parsedResult : -1;
+
+            while (parsedResult < 0) {
+                Console.WriteLine($"Please input the weight of the vehicle in Kg. Decimal numbers are allowed.");
+                parsedResult = double.TryParse(Console.ReadLine(), out parsedResult) ? parsedResult : -1;
+            }
+            Console.WriteLine("");
+            return parsedResult;
+        }
+
+        public int AskForTopSpeed() {
+            Console.WriteLine($"Please input the top speed of the vehicle in Km/h.");
+            int parsedResult = int.TryParse(Console.ReadLine(), out parsedResult) ? parsedResult : -1;
+
+            while (parsedResult < 0) {
+                Console.WriteLine($"Please input the top speed of the vehicle in Km/h.");
+                parsedResult = int.TryParse(Console.ReadLine(), out parsedResult) ? parsedResult : -1;
+            }
+            Console.WriteLine("");
+            return parsedResult;
+        }
+
+        public int AskForWheels() {
+            Console.WriteLine($"Please input how many wheels the vehicle has.");
+            int parsedResult = int.TryParse(Console.ReadLine(), out parsedResult) ? parsedResult : -1;
+
+            while (parsedResult < 0) {
+                Console.WriteLine($"Please input how many wheels the vehicle has.");
+                parsedResult = int.TryParse(Console.ReadLine(), out parsedResult) ? parsedResult : -1;
+            }
+            Console.WriteLine("");
+            return parsedResult;
+        }
+
+        public char AskForFlightClass() {
+
+            Console.WriteLine($"Please provide the flight class of the airplane. Accepted classes are 'A', 'B' & 'C'.");
+
+            while (true) {
+                char parsedResult = char.ToUpper(Console.ReadKey().KeyChar);
+
+                if (parsedResult == 'A' || parsedResult == 'B' || parsedResult == 'C') {
+                    Console.WriteLine();
+                    return parsedResult;
+                }
+                Console.Write("\b \b");
+            }
+        }
+
+        public bool AskForHasSail() {
+            Console.WriteLine("Does the boat have a sail?\n");
+            Console.WriteLine("1) True");
+            Console.WriteLine("2) False\n");
+            int parsedResult = int.TryParse(Console.ReadLine(), out parsedResult) ? parsedResult : -1;
+
+            while (parsedResult != 1 && parsedResult != 2) {
+                DisplayError(new OneOrTwoError().UEMessage());
+                parsedResult = int.TryParse(Console.ReadLine(), out parsedResult) ? parsedResult : -1;
+            }
+            Console.WriteLine("");
+
+            if (parsedResult == 1) { return true; } else {
+                return false;
+            }
+        }
+
+        public bool AskForIsDoubleDecker() {
+            Console.WriteLine("Is the bus a double decker?\n");
+            Console.WriteLine("1) True");
+            Console.WriteLine("2) False\n");
+            int parsedResult = int.TryParse(Console.ReadLine(), out parsedResult) ? parsedResult : -1;
+
+            while (parsedResult != 1 && parsedResult != 2) {
+                DisplayError(new OneOrTwoError().UEMessage());
+                parsedResult = int.TryParse(Console.ReadLine(), out parsedResult) ? parsedResult : -1;
+            }
+            Console.WriteLine("");
+
+            if (parsedResult == 1) { return true; } else {
+                return false;
+            }
+
+        }
+
+        public FuelType AskForFuelType() {
+            Console.WriteLine("Does the car run on Diesel or Gasoline?\n");
+            Console.WriteLine("1) Diesel");
+            Console.WriteLine("2) Gasoline\n");
+            int parsedResult = int.TryParse(Console.ReadLine(), out parsedResult) ? parsedResult : -1;
+
+            while (parsedResult != 1 && parsedResult != 2) {
+                DisplayError(new OneOrTwoError().UEMessage());
+                parsedResult = int.TryParse(Console.ReadLine(), out parsedResult) ? parsedResult : -1;
+            }
+            Console.WriteLine("");
+
+            if (parsedResult == 1) { return FuelType.Diesel; } else {
+                return FuelType.Gasoline;
+            }
+        }
+
+        public bool AskForHasCarriage() {
+            Console.WriteLine("Does the motorcycle have a carriage?\n");
+            Console.WriteLine("1) True");
+            Console.WriteLine("2) False\n");
+            int parsedResult = int.TryParse(Console.ReadLine(), out parsedResult) ? parsedResult : -1;
+
+            while (parsedResult != 1 && parsedResult != 2) {
+                DisplayError(new OneOrTwoError().UEMessage());
+                parsedResult = int.TryParse(Console.ReadLine(), out parsedResult) ? parsedResult : -1;
+            }
+            Console.WriteLine("");
+
+            if (parsedResult == 1) { return true; } else {
+                return false;
+            }
+        }
+
+        public void PrintAddVehicleSuccessMessage() {
+            Console.WriteLine("==New vehicle successfully added to garage.==\n");
         }
     }
 }
