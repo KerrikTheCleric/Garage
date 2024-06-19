@@ -36,7 +36,7 @@ namespace Garage {
 
         private void MainLoop() {
             uI.ClearConsole();
-            uI.PrintGarage(gHandler.GetArrayOfVehicles(), gHandler.GetTotalGarageSpaces());
+            uI.PrintGarage(gHandler.GetArrayOfVehiclesAndEmptySpots(), gHandler.GetTotalGarageSpaces());
             uI.PrintWelcomeMessage();
 
             bool exit = false;
@@ -50,6 +50,7 @@ namespace Garage {
                         DisplayAllVehicles();
                         break;
                     case 3:
+                        DisplayVehicleTypes();
                         break;
                     case 4:
                         break;
@@ -73,7 +74,7 @@ namespace Garage {
                     default:
                         break;
                 }
-                uI.PrintGarage(gHandler.GetArrayOfVehicles(), gHandler.GetTotalGarageSpaces());
+                uI.PrintGarage(gHandler.GetArrayOfVehiclesAndEmptySpots(), gHandler.GetTotalGarageSpaces());
                 uI.PrintStandardMenuMessage();
             }
             uI.ClearConsole();
@@ -86,7 +87,7 @@ namespace Garage {
 
             switch (uI.AskForMethodOfSearchingVehicle()) {
                 case 1:
-                    uI.PrintGarage(gHandler.GetArrayOfVehicles(), gHandler.GetTotalGarageSpaces());
+                    uI.PrintGarage(gHandler.GetArrayOfVehiclesAndEmptySpots(), gHandler.GetTotalGarageSpaces());
                     result = gHandler.FindVehicleAtSpotNumber(uI.AskForParkingNumber(gHandler.GetTotalGarageSpaces()));
                     parkingSpotSearch = true;
                     break;
@@ -107,8 +108,18 @@ namespace Garage {
         }
 
         private void DisplayAllVehicles() {
-            IVehicle[] vehicleArray = gHandler.GetArrayOfVehicles();
+            IVehicle[] vehicleArray = gHandler.GetArrayOfVehiclesAndEmptySpots();
             uI.PrintArrayOfVehicles(vehicleArray);
+        }
+
+        private void DisplayVehicleTypes() {
+            //IVehicle[] vehicleArray = gHandler.GetArrayOfVehicles();
+
+            List<string> listOfTypes = gHandler.CollectAllVehicleTypes();
+
+            foreach (string type in listOfTypes) {
+                uI.PrintVehicleTypeCount(type, gHandler.CountVehiclesOfType(type));
+            }
         }
 
         private void PopulateGarage() {

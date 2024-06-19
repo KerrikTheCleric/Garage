@@ -109,7 +109,7 @@ namespace Garage {
         public int MainMenu() {
             Console.WriteLine("1) Display Vehicle");
             Console.WriteLine("2) Display All Vehicles");
-            Console.WriteLine("3) Nothing");
+            Console.WriteLine("3) Vehicle Types");
             Console.WriteLine("4) Nothing");
             Console.WriteLine("5) Nothing");
             Console.WriteLine("6) Nothing");
@@ -242,6 +242,10 @@ namespace Garage {
             }
             Console.WriteLine("");
             return desiredRegNumber;
+        }
+
+        public void PrintVehicleTypeCount(string type, int count) {
+            Console.WriteLine($"{type}: {count}");
         }
     }
 }

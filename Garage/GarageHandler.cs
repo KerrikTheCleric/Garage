@@ -21,9 +21,15 @@ namespace GarageTask {
 
         private IGarage<IVehicle> Garage { get => _garage; set => _garage = value; }
 
-        public IVehicle[] GetArrayOfVehicles() {
+        public IVehicle[] GetArrayOfVehiclesAndEmptySpots() {
             return Garage.GetVehicleArray<IVehicle>();
         }
+
+        /*public List<IVehicle> GetListOfOnlyVehicles() {
+            List<IVehicle> listOfVehicles = [.. _garage.GetVehicleArray<IVehicle>()];
+            return listOfVehicles;
+        }*/
+
         public int GetTotalGarageSpaces() {
             return _garage.GetTotalGarageSpaces();
         }
@@ -47,6 +53,34 @@ namespace GarageTask {
 
         public IVehicle FindVehicleWithRegistrationNumber(string regNumber) {
             return _garage.FindVehicleWithRegistrationNumber(regNumber);
+        }
+
+        public List<String> CollectAllVehicleTypes() {
+            List<string> listOfTypes = new List<string>();
+
+            foreach (IVehicle v in _garage.GetVehicleArray<IVehicle>()) {
+
+                if (v != null) {
+                    if (!listOfTypes.Contains(v.GetType().Name)) {
+                        listOfTypes.Add(v.GetType().Name);
+                    }
+                }
+            }
+            return listOfTypes;
+        }
+
+        public int CountVehiclesOfType(string type) {
+            int result = 0;
+
+            foreach (IVehicle v in _garage.GetVehicleArray<IVehicle>()) {
+                if (v != null) {
+                    if (v.GetType().Name.Equals(type)) {
+                        result++;
+                    }
+                }
+                    
+            }
+            return result;
         }
 
 

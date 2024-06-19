@@ -38,5 +38,7 @@ namespace Garage.Interfaces {
         public int AskForParkingNumber(int totalGarageSpaces);
 
         public string AskForRegistrationNumber();
+
+        public void PrintVehicleTypeCount(string type, int count);
     }
 }

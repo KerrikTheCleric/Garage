@@ -9,7 +9,9 @@ namespace Garage.Interfaces {
     internal interface IGarageHandler {
 
 
-        public IVehicle[] GetArrayOfVehicles();
+        public IVehicle[] GetArrayOfVehiclesAndEmptySpots();
+
+        //public List<IVehicle> GetListOfOnlyVehicles();
 
         public int GetTotalGarageSpaces();
 
@@ -18,5 +20,9 @@ namespace Garage.Interfaces {
         public IVehicle FindVehicleAtSpotNumber(int index);
 
         public IVehicle FindVehicleWithRegistrationNumber(string regNumber);
+
+        public List<String> CollectAllVehicleTypes();
+
+        public int CountVehiclesOfType(string type);
     }
 }
