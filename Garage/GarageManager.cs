@@ -31,10 +31,58 @@ namespace Garage {
             if (uI.AskIfGarageShouldBePrefilled()) {
                 PopulateGarage();
             }
+            MainLoop();
+        }
 
+        private void MainLoop() {
+            uI.ClearConsole();
             uI.PrintGarage(gHandler.GetArrayOfVehicles(), gHandler.GetTotalGarageSpaces());
+            uI.PrintWelcomeMessage();
 
+            bool exit = false;
 
+            while (!exit) {
+                switch (uI.MainMenu()) {
+
+                    case 1:
+                        ListAllVehicles();
+                        break;
+                    case 2:
+                        break;
+                    case 3:
+                        break;
+                    case 4:
+                        break;
+                    case 5:
+                        break;
+                    case 6:
+                        break;
+                    case 7:
+                        break;
+                    case 8:
+                        break;
+                    case 9:
+                        break;
+                    case 10:
+                        break;
+                    case 11:
+                        break;
+                    case 12:
+                        exit = true;
+                        break;
+                    default:
+                        break;
+                }
+                uI.PrintGarage(gHandler.GetArrayOfVehicles(), gHandler.GetTotalGarageSpaces());
+                uI.PrintStandardMenuMessage();
+            }
+            uI.ClearConsole();
+            uI.PrintExitMessage();
+        }
+
+        private void ListAllVehicles() {
+            IVehicle[] vehicleArray = gHandler.GetArrayOfVehicles();
+            uI.PrintArrayOfVehicles(vehicleArray);
         }
 
         private void PopulateGarage() {
@@ -65,14 +113,6 @@ namespace Garage {
             prefabList.Add(new Vehicle("MMP010", Colour.Red, 47.8, 580.7, 600, 7));
 
 
-            /*Airplane v1 = new Airplane("TBA555", Colour.Black, 0.0, 0.0, 0, 'B', 8);
-            Boat v2 = new Boat("aBa123", Colour.Blue, 400.6, 2320.8, 60, true);
-            Bus v3 = new Bus("JKT550", Colour.Brown, 0.0, 0.0, 0, true);
-            Car v4 = new Car("KOL901", Colour.Gold, 0.0, 0.0, 0, default, 4);
-            Motorcycle v5 = new Motorcycle("KLG899", Colour.Purple, 0.0, 0.0, 0, true);
-            Vehicle v6 = new Vehicle("MMO010", Colour.Gray, 0.0, 0.0, 0, 0);*/
-
-
 
             // Ask how many Vehicles to put in out of the maximum available and maximum
 
@@ -81,7 +121,6 @@ namespace Garage {
             // Add vehicles
 
             for (int i = 0; i < vehiclesToAdd; i++) {
-
                 try {
                     gHandler.AddVehicleToGarage(prefabList[i]);
                 } catch (Exception) {

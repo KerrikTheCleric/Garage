@@ -65,8 +65,10 @@ namespace Garage {
             Console.WriteLine("Would you like to fill up the garage with already existing vehicles, Y/N?\n");
 
             if (YorN() == 'Y') {
+                Console.WriteLine("");
                 return true;
             } else {
+                Console.WriteLine("");
                 return false;
             }
         }
@@ -90,6 +92,115 @@ namespace Garage {
                 desiredAmount = int.TryParse(Console.ReadLine(), out desiredAmount) ? desiredAmount : 0;
             }
             return desiredAmount;
+        }
+
+        public void ClearConsole() {
+            Console.Clear();
+        }
+
+        public void PrintWelcomeMessage() {
+            Console.WriteLine("Welcome to Garage Software. This is the main menu where you can select options pertaining to your garage by inputting the appropriate number as listed below:\n");
+        }
+
+        public void PrintStandardMenuMessage() {
+            Console.WriteLine("Please select an option by inputting the appropriate number as listed below:\n");
+        }
+
+        public int MainMenu() {
+            Console.WriteLine("1) List All Vehicles");
+            Console.WriteLine("2) Nothing");
+            Console.WriteLine("3) Nothing");
+            Console.WriteLine("4) Nothing");
+            Console.WriteLine("5) Nothing");
+            Console.WriteLine("6) Nothing");
+            Console.WriteLine("7) Nothing");
+            Console.WriteLine("8) Nothing");
+            Console.WriteLine("9) Nothing");
+            Console.WriteLine("10) Nothing");
+            Console.WriteLine("11) Nothing");
+            Console.WriteLine("12) Exit");
+
+            int parsedResult = int.TryParse(Console.ReadLine(), out parsedResult) ? parsedResult : -1;
+
+            while (parsedResult <= 0 && parsedResult < 13) {
+                parsedResult = int.TryParse(Console.ReadLine(), out parsedResult) ? parsedResult : -1;
+            }
+
+            ClearConsole();
+
+            return parsedResult;
+        }
+
+
+        // Make Private?
+        public void PrintVehicle(IVehicle v, int number = -1) {
+
+            if (v != null) {
+
+                switch (v.GetType().Name) {
+                    case "Airplane":
+                        Airplane airplane = (Airplane)v;
+                        if (number == -1) {
+                            Console.WriteLine(airplane.GetSpecificationsText());
+                        } else {
+                            Console.WriteLine($"{number}. " + airplane.GetSpecificationsText());
+                        }
+                        break;
+                    case "Boat":
+                        Boat boat = (Boat)v;
+                        if (number == -1) {
+                            Console.WriteLine(boat.GetSpecificationsText());
+                        } else {
+                            Console.WriteLine($"{number}. " + boat.GetSpecificationsText());
+                        }
+                        break;
+                    case "Bus":
+                        Bus bus = (Bus)v;
+                        if (number == -1) {
+                            Console.WriteLine(bus.GetSpecificationsText());
+                        } else {
+                            Console.WriteLine($"{number}. " + bus.GetSpecificationsText());
+                        }
+                        break;
+                    case "Car":
+                        Car car = (Car)v;
+                        if (number == -1) {
+                            Console.WriteLine(car.GetSpecificationsText());
+                        } else {
+                            Console.WriteLine($"{number}. " + car.GetSpecificationsText());
+                        }
+                        break;
+                    case "Motorcycle":
+                        Motorcycle motorcycle = (Motorcycle)v;
+                        if (number == -1) {
+                            Console.WriteLine(motorcycle.GetSpecificationsText());
+                        } else {
+                            Console.WriteLine($"{number}. " + motorcycle.GetSpecificationsText());
+                        }                        
+                        break;
+                    case "Vehicle":
+                        Vehicle vehicle = (Vehicle)v;
+                        if (number == -1) {
+                            Console.WriteLine("Unknown Vehicle: " +vehicle.GetSpecificationsText());
+                        } else {
+                            Console.WriteLine($"{number}. " + "Unknown Vehicle: " + vehicle.GetSpecificationsText());
+                        }
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
+
+        public void PrintArrayOfVehicles(IVehicle[] array) {
+            for (int i = 0; i < array.Length; i++) {
+                PrintVehicle(array[i], i + 1);
+            }
+            Console.WriteLine();
+        }
+
+        public void PrintExitMessage() {
+            Console.WriteLine("Exiting application...\n");
         }
     }
 }

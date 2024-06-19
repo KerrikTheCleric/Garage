@@ -11,14 +11,19 @@ namespace GarageTask.Vehicles
 {
     internal class Vehicle : IVehicle {
         private string? _registrationNumber;
+        private Colour _colour;
+        private double _cargoSpace;
+        private double _weight;
+        private int _topSpeed;
+        private int _wheels;
 
         public Vehicle(string registrationNumber, Colour colour,  double cargoSpace, double weight, int topSpeed, int wheels) {
             RegistrationNumber = registrationNumber;
-            Colour = colour;
-            CargoSpace = cargoSpace;
-            Weight = weight;
-            TopSpeed = topSpeed;
-            Wheels = wheels;
+            _colour = colour;
+            _cargoSpace = cargoSpace;
+            _weight = weight;
+            _topSpeed = topSpeed;
+            _wheels = wheels;
         }
 
         private string RegistrationNumber { 
@@ -39,38 +44,32 @@ namespace GarageTask.Vehicles
             }
         }
 
-        private Colour Colour { get; set; }
-
-        private double CargoSpace { get; set; }
-
-        private double Weight { get; set; }
-
-        private int TopSpeed { get; set; }
-
-        private int Wheels { get; set; }
-
         public string GetRegistrationNumber() {
             return RegistrationNumber;
         }
 
         public Colour GetColour() {
-            return Colour;
+            return _colour;
         }
 
         public double GetCargoSpace() {
-            return CargoSpace;
+            return _cargoSpace;
         }
 
         public double GetWeight() {
-            return Weight;
+            return _weight;
         }
 
         public int GetTopSpeed() {
-            return TopSpeed;
+            return _topSpeed;
         }
 
         public int GetWheels() {
-            return Wheels;
+            return _wheels;
+        }
+
+        public virtual string GetSpecificationsText() {
+            return $"Registration Number: {_registrationNumber} - Colour: {_colour} - Cargo Space: {_cargoSpace} - Weight:  {_weight} - Top Speed: {_topSpeed} - Wheels: {_wheels}";
         }
 
     }

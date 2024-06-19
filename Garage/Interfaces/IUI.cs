@@ -18,5 +18,19 @@ namespace Garage.Interfaces {
         public bool AskIfGarageShouldBePrefilled();
 
         public int AskHowManyVehiclesShouldBeAddedAutomatically(int availabelVehicles, int totalGarageSpaces);
+
+        public void ClearConsole();
+
+        public void PrintWelcomeMessage();
+
+        public void PrintStandardMenuMessage();
+
+        public int MainMenu();
+
+        public void PrintVehicle(IVehicle v, int number = -1);
+
+        public void PrintArrayOfVehicles(IVehicle[] array);
+
+        public void PrintExitMessage();
     }
 }

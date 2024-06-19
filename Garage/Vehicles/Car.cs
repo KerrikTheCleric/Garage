@@ -8,12 +8,16 @@ using System.Threading.Tasks;
 namespace GarageTask.Vehicles
 {
     internal class Car : Vehicle {
+        private FuelType _fuelType;
+
         public Car(string registrationNumber, Colour colour, double cargoSpace, double weight, int topSpeed, FuelType fueltype, int wheels = 4) : base(registrationNumber, colour, cargoSpace, weight, topSpeed, wheels) {
-            FuelType = fueltype;
+            _fuelType = fueltype;
         }
 
-        private FuelType FuelType { get; set; }
+        public FuelType GetFueltype() { return _fuelType; }
 
-        public FuelType GetFueltype() { return FuelType; }
+        public override string GetSpecificationsText() {
+            return "Car: " + base.GetSpecificationsText() + $" - Fuel Type: {_fuelType}";
+        }
     }
 }

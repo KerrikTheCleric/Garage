@@ -15,6 +15,7 @@ using System.Text.Json;
  5. Print garage using colours?
  6. Swap properties for standard fields.
  7. Decide on how to balance custom errors versus exceptions.
+ 8. Add offset for first 9 printed vehicles in the display.
  
  */
 

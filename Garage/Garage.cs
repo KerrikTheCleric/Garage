@@ -47,7 +47,7 @@ namespace GarageTask
                 }
             }
 
-            _vehicles[freeSpace] = (T)newVehicle;
+            _vehicles[freeSpace] = newVehicle;
             _remainingGarageSpaces--;
             return 0;
         }

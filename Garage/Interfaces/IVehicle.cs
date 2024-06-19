@@ -21,5 +21,7 @@ namespace Garage.Interfaces
         public int GetTopSpeed();
 
         public int GetWheels();
+
+        public string GetSpecificationsText();
     }
 }

@@ -8,13 +8,16 @@ using Garage.Enums;
 namespace GarageTask.Vehicles
 {
     internal class Airplane : Vehicle {
+        private char _flightClass;
 
         public Airplane(string registrationNumber, Colour colour, double cargoSpace, double weight, int topSpeed, char flightClass, int wheels = 3) : base(registrationNumber, colour, cargoSpace, weight, topSpeed, wheels) {
-            FlightClass = flightClass;
+            _flightClass = flightClass;
         }
 
-        private char FlightClass { get; set; }
+        public char GetFlightClass() { return _flightClass; }
 
-        public char GetFlightClass() { return FlightClass; }
+        public override string GetSpecificationsText() {
+            return "Airplane: " + base.GetSpecificationsText() + $" - Flight Class: {_flightClass}";
+        }
     }
 }
