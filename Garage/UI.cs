@@ -44,7 +44,22 @@ namespace Garage {
             int columnsPrinted = 0;
             int spacesPrinted = 0;
 
-            for (int i = 0; i < totalGarageSpaces; i++) {
+            while (spacesPrinted < 9) {
+                if (vehicles[spacesPrinted] == null) {
+                    Console.Write($" {spacesPrinted + 1}. [ ] ");
+                } else {
+                    Console.Write($" {spacesPrinted + 1}. [V] ");
+                }
+                columnsPrinted++;
+                spacesPrinted++;
+
+                if (columnsPrinted == GarageConstants.GARAGE_PRINTING_COLUMN_COUNT) {
+                    Console.Write("\n");
+                    columnsPrinted = 0;
+                }
+            }
+
+            for (int i = spacesPrinted; i < totalGarageSpaces; i++) {
                 if (vehicles[i] == null) {
                     Console.Write($"{spacesPrinted + 1}. [ ] ");
                 } else {
