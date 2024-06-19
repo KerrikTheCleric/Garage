@@ -45,9 +45,10 @@ namespace Garage {
                 switch (uI.MainMenu()) {
 
                     case 1:
-                        ListAllVehicles();
+                        DisplayVehicle();
                         break;
                     case 2:
+                        DisplayAllVehicles();
                         break;
                     case 3:
                         break;
@@ -80,7 +81,36 @@ namespace Garage {
             uI.PrintExitMessage();
         }
 
-        private void ListAllVehicles() {
+        private void DisplayVehicle() {
+            // Ask for search method
+            // Do Search
+
+            IVehicle result = null;
+
+            switch (uI.AskForMethodOfSearchingVehicle()) {
+                case 1:
+                    uI.PrintGarage(gHandler.GetArrayOfVehicles(), gHandler.GetTotalGarageSpaces());
+                    result = gHandler.FindVehicleAtSpotNumber(uI.AskForParkingNumber(gHandler.GetTotalGarageSpaces()));
+                    break;
+                case 2:
+                    // Add error handling somewhere in the chain
+                    uI.PrintGarage(gHandler.GetArrayOfVehicles(), gHandler.GetTotalGarageSpaces());
+
+                    break;
+                default:
+                    break;
+            }
+
+            if (result != null) {
+                uI.PrintVehicle(result);
+            } else {
+                uI.DisplayError(new NoVehicleFoundAtParkingSpotError().UEMessage());
+            }
+
+            // Display result
+        }
+
+        private void DisplayAllVehicles() {
             IVehicle[] vehicleArray = gHandler.GetArrayOfVehicles();
             uI.PrintArrayOfVehicles(vehicleArray);
         }

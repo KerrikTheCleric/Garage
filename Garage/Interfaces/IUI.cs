@@ -32,5 +32,9 @@ namespace Garage.Interfaces {
         public void PrintArrayOfVehicles(IVehicle[] array);
 
         public void PrintExitMessage();
+
+        public int AskForMethodOfSearchingVehicle();
+
+        public int AskForParkingNumber(int totalGarageSpaces);
     }
 }

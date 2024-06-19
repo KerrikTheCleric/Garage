@@ -107,8 +107,8 @@ namespace Garage {
         }
 
         public int MainMenu() {
-            Console.WriteLine("1) List All Vehicles");
-            Console.WriteLine("2) Nothing");
+            Console.WriteLine("1) Display Vehicle");
+            Console.WriteLine("2) Display All Vehicles");
             Console.WriteLine("3) Nothing");
             Console.WriteLine("4) Nothing");
             Console.WriteLine("5) Nothing");
@@ -132,7 +132,6 @@ namespace Garage {
         }
 
 
-        // Make Private?
         public void PrintVehicle(IVehicle v, int number = -1) {
 
             if (v != null) {
@@ -202,5 +201,38 @@ namespace Garage {
         public void PrintExitMessage() {
             Console.WriteLine("Exiting application...\n");
         }
+
+        public int AskForMethodOfSearchingVehicle() {
+
+            Console.WriteLine("How do you wish to find the vehicle?\n");
+            Console.WriteLine("1) Parking Number");
+            Console.WriteLine("2) Registration Number\n");
+            int parsedResult = int.TryParse(Console.ReadLine(), out parsedResult) ? parsedResult : -1;
+
+            while (parsedResult != 1 && parsedResult != 2 ) {
+                DisplayError(new DisplayVehicleMenuError().UEMessage());
+                parsedResult = int.TryParse(Console.ReadLine(), out parsedResult) ? parsedResult : -1;
+            }
+            Console.WriteLine("");
+            return parsedResult;
+        }
+
+        public int AskForParkingNumber(int totalGarageSpaces) {
+
+            Console.WriteLine($"Please input the desired parking number in the span 1 through {totalGarageSpaces} below:\n");
+
+            int desiredParkingNumber = int.TryParse(Console.ReadLine(), out desiredParkingNumber) ? desiredParkingNumber : 0;
+
+            while (desiredParkingNumber <= 0 || desiredParkingNumber > totalGarageSpaces) {
+                Console.WriteLine($"Please enter a parking number ranging from 1 to {desiredParkingNumber}:\n");
+                desiredParkingNumber = int.TryParse(Console.ReadLine(), out desiredParkingNumber) ? desiredParkingNumber : 0;
+            }
+            Console.WriteLine("");
+            return desiredParkingNumber - 1;
+        }
+
+        /*public string AskForRegistrationNumber() {
+
+        }*/
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GarageTask;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,5 +14,9 @@ namespace Garage.Interfaces {
         public int GetTotalGarageSpaces();
 
         public void AddVehicleToGarage(IVehicle vehicle);
+
+        public IVehicle FindVehicleAtSpotNumber(int index);
+
+        public IVehicle FindVehicleWithRegistrationNumber(string regNumber);
     }
 }

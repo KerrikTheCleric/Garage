@@ -15,6 +15,10 @@ namespace Garage.Interfaces {
 
         public int AddVehicle(T newVehicle);
 
+        public T FindVehicleAtSpotNumber(int index);
+
+        public T FindVehicleWithRegistrationNumber(string regNumber);
+
         /*public int AddVehicle(IVehicle newVehicle) {
 
             if (RemainingGarageSpaces == 0) {

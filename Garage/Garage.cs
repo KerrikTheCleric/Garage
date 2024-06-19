@@ -56,15 +56,24 @@ namespace GarageTask
 
         // RemoveVehicleWithRegistrationNumber
 
-        public IVehicle FindVehicleAtSpotNumber(int index) {
-
+        public T FindVehicleAtSpotNumber(int index) {
             if (_totalGarageSpaces > index && index >= 0) {
                 return _vehicles[index];
             }
-            return null;
+            return default(T);
         }
 
-        // FindVehicleWithRegistrationNumber
+        public T FindVehicleWithRegistrationNumber(string regNumber) {
+            for (int i = 0; i < _vehicles.Length; ++i) {
+
+                if (_vehicles[i] != null) {
+                    if (regNumber == _vehicles[i].GetRegistrationNumber()) {
+                        return _vehicles[i];
+                    }
+                }
+            }
+            return default(T);
+        }
 
         public IEnumerator<T> GetEnumerator() {
             for (int i = 0; i < _vehicles.Length; ++i) {

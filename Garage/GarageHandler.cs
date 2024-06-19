@@ -40,5 +40,15 @@ namespace GarageTask {
             }
 
         }
+
+        public IVehicle FindVehicleAtSpotNumber(int index) {
+            return _garage.FindVehicleAtSpotNumber(index);
+        }
+
+        public IVehicle FindVehicleWithRegistrationNumber(string regNumber) {
+            return _garage.FindVehicleWithRegistrationNumber(regNumber);
+        }
+
+
     }
 }
