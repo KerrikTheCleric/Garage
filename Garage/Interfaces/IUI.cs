@@ -36,5 +36,7 @@ namespace Garage.Interfaces {
         public int AskForMethodOfSearchingVehicle();
 
         public int AskForParkingNumber(int totalGarageSpaces);
+
+        public string AskForRegistrationNumber();
     }
 }

@@ -231,8 +231,17 @@ namespace Garage {
             return desiredParkingNumber - 1;
         }
 
-        /*public string AskForRegistrationNumber() {
+        public string AskForRegistrationNumber() {
+            Console.WriteLine($"Please input the desired registration number formatted like \"ABC123\"\n");
 
-        }*/
+            string desiredRegNumber = Console.ReadLine().ToUpper();
+
+            while (!Helper.IsRegistrationNumberValid(desiredRegNumber)) {
+                Console.WriteLine($"Please enter a registration number formatted like \"ABC123\"\n");
+                desiredRegNumber = Console.ReadLine().ToUpper();
+            }
+            Console.WriteLine("");
+            return desiredRegNumber;
+        }
     }
 }

@@ -1,9 +1,11 @@
-﻿using Garage.Enums;
+﻿using Garage;
+using Garage.Enums;
 using Garage.Errors;
 using Garage.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Metadata.Ecma335;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -17,7 +19,7 @@ namespace GarageTask.Vehicles
         private int _topSpeed;
         private int _wheels;
 
-        public Vehicle(string registrationNumber, Colour colour,  double cargoSpace, double weight, int topSpeed, int wheels) {
+        public Vehicle(string registrationNumber, Colour colour, double cargoSpace, double weight, int topSpeed, int wheels) {
             RegistrationNumber = registrationNumber;
             _colour = colour;
             _cargoSpace = cargoSpace;
@@ -26,20 +28,14 @@ namespace GarageTask.Vehicles
             _wheels = wheels;
         }
 
-        private string RegistrationNumber { 
+        private string RegistrationNumber {
             get => _registrationNumber;
             set {
-                if (value.Length != 6) {
+
+                if (!Helper.IsRegistrationNumberValid(value)) {
                     throw new ArgumentException(new RegistratíonNumberFormatError().UEMessage());
                 }
 
-                for (int i = 0; i < 6; i++) {
-                    if (i < 3) {
-                        if (!char.IsLetter(value[i])) { throw new ArgumentException(new RegistratíonNumberFormatError().UEMessage()); } 
-                    } else {
-                        if (!char.IsNumber(value[i])) { throw new ArgumentException(new RegistratíonNumberFormatError().UEMessage()); }
-                    }
-                }
                 _registrationNumber = value.ToUpper();
             }
         }
@@ -71,6 +67,5 @@ namespace GarageTask.Vehicles
         public virtual string GetSpecificationsText() {
             return $"Registration Number: {_registrationNumber} - Colour: {_colour} - Cargo Space: {_cargoSpace} - Weight:  {_weight} - Top Speed: {_topSpeed} - Wheels: {_wheels}";
         }
-
     }
 }

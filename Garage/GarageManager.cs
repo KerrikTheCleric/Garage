@@ -43,7 +43,6 @@ namespace Garage {
 
             while (!exit) {
                 switch (uI.MainMenu()) {
-
                     case 1:
                         DisplayVehicle();
                         break;
@@ -82,20 +81,17 @@ namespace Garage {
         }
 
         private void DisplayVehicle() {
-            // Ask for search method
-            // Do Search
-
             IVehicle result = null;
+            bool parkingSpotSearch = false;
 
             switch (uI.AskForMethodOfSearchingVehicle()) {
                 case 1:
                     uI.PrintGarage(gHandler.GetArrayOfVehicles(), gHandler.GetTotalGarageSpaces());
                     result = gHandler.FindVehicleAtSpotNumber(uI.AskForParkingNumber(gHandler.GetTotalGarageSpaces()));
+                    parkingSpotSearch = true;
                     break;
                 case 2:
-                    // Add error handling somewhere in the chain
-                    uI.PrintGarage(gHandler.GetArrayOfVehicles(), gHandler.GetTotalGarageSpaces());
-
+                    result = gHandler.FindVehicleWithRegistrationNumber(uI.AskForRegistrationNumber());
                     break;
                 default:
                     break;
@@ -103,11 +99,11 @@ namespace Garage {
 
             if (result != null) {
                 uI.PrintVehicle(result);
-            } else {
+            } else if(parkingSpotSearch){
                 uI.DisplayError(new NoVehicleFoundAtParkingSpotError().UEMessage());
+            } else {
+                uI.DisplayError(new NoVehicleWithRegistrationNumberFoundError().UEMessage());
             }
-
-            // Display result
         }
 
         private void DisplayAllVehicles() {
