@@ -1,4 +1,5 @@
-﻿using Garage.Interfaces;
+﻿using Garage.Errors;
+using Garage.Interfaces;
 using GarageTask.Vehicles;
 using System;
 using System.Collections.Generic;
@@ -25,6 +26,19 @@ namespace GarageTask {
         }
         public int GetTotalGarageSpaces() {
             return _garage.GetTotalGarageSpaces();
+        }
+
+        public void AddVehicleToGarage(IVehicle vehicle) {
+
+            switch (_garage.AddVehicle(vehicle)) {
+                case 1:
+                    throw new ArgumentException(new GarageFullError().UEMessage());
+                case 2:
+                    throw new ArgumentException(new ExistingRegistrationNumberError().UEMessage());
+                default:
+                    break;
+            }
+
         }
     }
 }

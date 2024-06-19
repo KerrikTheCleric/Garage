@@ -16,5 +16,7 @@ namespace Garage.Interfaces {
         public void PrintGarage(IVehicle[] vehicles, int totalGarageSpaces);
 
         public bool AskIfGarageShouldBePrefilled();
+
+        public int AskHowManyVehiclesShouldBeAddedAutomatically(int availabelVehicles, int totalGarageSpaces);
     }
 }

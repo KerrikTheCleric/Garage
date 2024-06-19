@@ -13,6 +13,8 @@ namespace Garage.Interfaces {
 
         public int GetTotalGarageSpaces();
 
+        public int AddVehicle(T newVehicle);
+
         /*public int AddVehicle(IVehicle newVehicle) {
 
             if (RemainingGarageSpaces == 0) {

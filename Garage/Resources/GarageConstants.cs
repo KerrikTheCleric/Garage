@@ -6,6 +6,6 @@ using System.Threading.Tasks;
 
 namespace Garage.Resources {
     public class GarageConstants {
-        public const int GARAGE_PRINTING_COLUMN_COUNT = 3;
+        public const int GARAGE_PRINTING_COLUMN_COUNT = 5;
     }
 }

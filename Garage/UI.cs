@@ -55,13 +55,34 @@ namespace Garage {
         }
 
         public bool AskIfGarageShouldBePrefilled() {
-            Console.WriteLine("Would you like to fill up the garage with already existing vehicles, Y/N?:\n");
+            Console.WriteLine("Would you like to fill up the garage with already existing vehicles, Y/N?\n");
 
             if (YorN() == 'Y') {
                 return true;
             } else {
                 return false;
             }
+        }
+
+        public int AskHowManyVehiclesShouldBeAddedAutomatically(int availabelVehicles, int totalGarageSpaces) {
+
+            int upperLimit = 0;
+            if (totalGarageSpaces < availabelVehicles) {
+                upperLimit = totalGarageSpaces;
+            } else {
+                upperLimit = availabelVehicles;
+            }
+
+            Console.WriteLine($"There are {totalGarageSpaces} parking spots available and there are {availabelVehicles} vehicles that can be added. How many would you like to add? Enter a number ranging from 1 to {upperLimit}:\n");
+
+            int desiredAmount = int.TryParse(Console.ReadLine(), out desiredAmount) ? desiredAmount : 0;
+            
+
+            while (desiredAmount <= 0 || desiredAmount > upperLimit) {
+                Console.WriteLine($"Please enter a number ranging from 1 to {upperLimit}:\n");
+                desiredAmount = int.TryParse(Console.ReadLine(), out desiredAmount) ? desiredAmount : 0;
+            }
+            return desiredAmount;
         }
     }
 }
