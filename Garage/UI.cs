@@ -1,4 +1,5 @@
-﻿using Garage.Interfaces;
+﻿using Garage.Errors;
+using Garage.Interfaces;
 using Garage.Resources;
 using GarageTask.Vehicles;
 using System;
@@ -29,6 +30,12 @@ namespace Garage {
         public int AskGarageSize() {
             Console.WriteLine("Initializing new garage. Input the maximum amount of vehicles desired below:\n");
             int parsedResult = int.TryParse(Console.ReadLine(), out parsedResult) ? parsedResult : -1;
+
+            while (parsedResult <= 0) {
+                DisplayError(new GarageSizeError().UEMessage());
+                parsedResult = int.TryParse(Console.ReadLine(), out parsedResult) ? parsedResult : -1;
+            }
+
             return parsedResult;
         }
 

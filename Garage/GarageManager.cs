@@ -16,14 +16,7 @@ namespace Garage {
 
         public GarageManager() {
             uI = new UI();
-
             int garageSize = uI.AskGarageSize();
-
-            while (garageSize  <= 0) {
-                uI.DisplayError(new GarageSizeError().UEMessage());
-                garageSize = uI.AskGarageSize();
-            }
-
             gHandler = new GarageHandler(garageSize);
         }
 
