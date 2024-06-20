@@ -11,7 +11,7 @@ namespace Garage.Interfaces {
 
         public IVehicle[] GetArrayOfVehiclesAndEmptySpots();
 
-        //public List<IVehicle> GetListOfOnlyVehicles();
+        public List<IVehicle> GetListOfOnlyVehicles();
 
         public int GetTotalGarageSpaces();
 

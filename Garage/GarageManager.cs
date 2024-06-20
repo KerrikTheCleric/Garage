@@ -3,8 +3,10 @@ using Garage.Errors;
 using Garage.Interfaces;
 using GarageTask;
 using GarageTask.Vehicles;
+using Microsoft.VisualBasic.FileIO;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -22,12 +24,6 @@ namespace Garage {
 
 
         public void StartProgram() {
-
-            // Print Empty Garage
-            //uI.PrintGarage(gHandler.GetArrayOfVehicles(), gHandler.GetTotalGarageSpaces());
-
-            // Ask to populate garage with old vehicles
-
             if (uI.AskIfGarageShouldBePrefilled()) {
                 PopulateGarage();
             }
@@ -59,18 +55,9 @@ namespace Garage {
                         RemoveVehicle();
                         break;
                     case 6:
+                        FilterVehicles();
                         break;
                     case 7:
-                        break;
-                    case 8:
-                        break;
-                    case 9:
-                        break;
-                    case 10:
-                        break;
-                    case 11:
-                        break;
-                    case 12:
                         exit = true;
                         break;
                     default:
@@ -129,7 +116,7 @@ namespace Garage {
                 return;
             }
 
-            string type = uI.AskForType();
+            string type = uI.AskForVehicleType();
             string regNumber = uI.AskForRegistrationNumber();
             Colour colour = uI.AskForColour();
             double cargoSpace = uI.AskForCargoSpace();
@@ -227,6 +214,174 @@ namespace Garage {
                 default:
                     break;
             }
+        }
+
+        private void FilterVehicles() {
+
+            // Each filter starts as valid and maps to a string in this order: ["Cargo Space", "Colour", "Top Speed", "Vehicle Type", "Weight", "Wheels"]
+
+            bool[] remainingFilters= [true, true, true, true, true, true];
+
+            // Display List
+
+            List<IVehicle> filteredVehicles = gHandler.GetListOfOnlyVehicles();
+            double filterCargoSpace = 0;
+            Colour filterColour = Colour.Blue;
+            int filterTopSpeed = 0;
+            string filterVehicleType = "";
+            double filterWeight = 0;
+            int filterWheels = 0;
+
+            while (FiltersRemain(remainingFilters)) {
+
+                // Switchcase on filters
+
+                int currentFilter = uI.AskWhatToFilterOn(remainingFilters);
+
+
+                switch (currentFilter) {
+                    case 0:
+                        // Cargo Space
+                        filterCargoSpace = uI.AskForCargoSpace();
+                        filteredVehicles = FilterOnCargoSpace(filteredVehicles, filterCargoSpace);
+                        break;
+                    case 1:
+                        // Colour
+                        filterColour = uI.AskForColour();
+                        filteredVehicles = FilterOnColour(filteredVehicles, filterColour);
+                        break;
+                    case 2:
+                        // Top Speed
+                        filterTopSpeed = uI.AskForTopSpeed();
+                        filteredVehicles = FilterOnTopSpeed(filteredVehicles, filterTopSpeed);
+                        break;
+                    case 3:
+                        // Vehicle Type
+                        filterVehicleType = uI.AskForVehicleType();
+                        filteredVehicles = FilterOnVehicleType(filteredVehicles, filterVehicleType);
+                        break;
+                    case 4:
+                        // Weight
+                        filterWeight = uI.AskForWeight();
+                        filteredVehicles = FilterOnWeight(filteredVehicles, filterWeight);
+                        break;
+                    case 5:
+                        // Wheels
+                        filterWheels = uI.AskForWheels();
+                        filteredVehicles = FilterOnWheels(filteredVehicles, filterWheels);
+                        break;
+                    default:
+                        break;
+                }
+
+                // Display Result
+
+                if (filteredVehicles.Count == 0) {
+                    // Quit if List is empty
+
+                    uI.PrintFilterResultText(1);
+                    return;
+                } else {
+                    uI.PrintListOfVehicles(filteredVehicles);
+                }
+
+                
+
+                remainingFilters[currentFilter] = false;
+
+                // Ask to quit or filter more
+
+                if (!uI.AskToFilterAgain()) {
+                    uI.PrintFilterResultText(2);
+                    return;
+                }
+
+            }
+
+            // Quit if there are no more filters
+
+            uI.PrintFilterResultText(3);
+        }
+
+        private bool FiltersRemain(bool[] remainingFilters) {
+            for (int i = 0; i < remainingFilters.Length; i++) {
+                if (remainingFilters[i]) {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        private List<IVehicle> FilterOnCargoSpace(List<IVehicle> listToFilter, double cargoSpaceFilter) {
+
+            List<IVehicle> newList = new List<IVehicle>();
+
+            foreach (IVehicle v in listToFilter) {
+                if (v.GetCargoSpace() > cargoSpaceFilter) {
+                    newList.Add(v);
+                }
+            }
+            return newList;
+        }
+
+        private List<IVehicle> FilterOnColour(List<IVehicle> listToFilter, Colour colourFilter) {
+
+            List<IVehicle> newList = new List<IVehicle>();
+
+            foreach (IVehicle v in listToFilter) {
+                if (v.GetColour() == colourFilter) {
+                    newList.Add(v);
+                }
+            }
+            return newList;
+        }
+
+        private List<IVehicle> FilterOnTopSpeed(List<IVehicle> listToFilter, int topSpeedFilter) {
+
+            List<IVehicle> newList = new List<IVehicle>();
+
+            foreach (IVehicle v in listToFilter) {
+                if (v.GetTopSpeed() > topSpeedFilter) {
+                    newList.Add(v);
+                }
+            }
+            return newList;
+        }
+
+        private List<IVehicle> FilterOnVehicleType(List<IVehicle> listToFilter, string vehicleTypeFilter) {
+
+            List<IVehicle> newList = new List<IVehicle>();
+
+            foreach (IVehicle v in listToFilter) {
+                if (v.GetType().Name == vehicleTypeFilter) {
+                    newList.Add(v);
+                }
+            }
+            return newList;
+        }
+
+        private List<IVehicle> FilterOnWeight(List<IVehicle> listToFilter, double weightFilter) {
+
+            List<IVehicle> newList = new List<IVehicle>();
+
+            foreach (IVehicle v in listToFilter) {
+                if (v.GetWeight() > weightFilter) {
+                    newList.Add(v);
+                }
+            }
+            return newList;
+        }
+
+        private List<IVehicle> FilterOnWheels(List<IVehicle> listToFilter, int wheelseFilter) {
+
+            List<IVehicle> newList = new List<IVehicle>();
+
+            foreach (IVehicle v in listToFilter) {
+                if (v.GetWheels() == wheelseFilter) {
+                    newList.Add(v);
+                }
+            }
+            return newList;
         }
 
         private void PopulateGarage() {

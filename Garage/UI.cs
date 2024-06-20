@@ -131,17 +131,12 @@ namespace Garage {
             Console.WriteLine("3) Vehicle Types");
             Console.WriteLine("4) Add Vehicle");
             Console.WriteLine("5) Remove Vehicle");
-            Console.WriteLine("6) Nothing");
-            Console.WriteLine("7) Nothing");
-            Console.WriteLine("8) Nothing");
-            Console.WriteLine("9) Nothing");
-            Console.WriteLine("10) Nothing");
-            Console.WriteLine("11) Nothing");
-            Console.WriteLine("12) Exit");
+            Console.WriteLine("6) Filter Vehicles");
+            Console.WriteLine("7) Exit");
 
             int parsedResult = int.TryParse(Console.ReadLine(), out parsedResult) ? parsedResult : -1;
 
-            while (parsedResult <= 0 && parsedResult < 13) {
+            while (parsedResult <= 0 && parsedResult > 7) {
                 parsedResult = int.TryParse(Console.ReadLine(), out parsedResult) ? parsedResult : -1;
             }
 
@@ -207,6 +202,7 @@ namespace Garage {
                     default:
                         break;
                 }
+                Console.WriteLine("");
             }
         }
 
@@ -215,6 +211,13 @@ namespace Garage {
                 PrintVehicle(array[i], i + 1);
             }
             Console.WriteLine();
+        }
+
+        public void PrintListOfVehicles(List<IVehicle> list) {
+
+            foreach (IVehicle v in list) {
+                PrintVehicle(v);
+            }
         }
 
         public void PrintExitMessage() {
@@ -281,7 +284,7 @@ namespace Garage {
             Console.WriteLine($"{type}: {count}");
         }
 
-        public string AskForType() {
+        public string AskForVehicleType() {
             Console.WriteLine("What type of vehicle is it? Select \"Vehicle\" if nothing matches.\n");
             Console.WriteLine("1) Airplane");
             Console.WriteLine("2) Boat");
@@ -525,6 +528,83 @@ namespace Garage {
                 Console.WriteLine("No vehicle with inputted registration number found. Removal unsuccessful.");
             }
             Console.WriteLine("");
+        }
+
+        public int AskWhatToFilterOn(bool[] remainingFilters) {
+            Console.WriteLine("What do you wish to filter on?\n");
+
+            int printedFilters = 0;
+
+            string[] filterText = ["Cargo Space", "Colour", "Top Speed", "Vehicle Type", "Weight", "Wheels"];
+            List<string> relevantFilters= new List<string>();
+
+            for (int i = 0; i < 6; i++) {
+                if (remainingFilters[i]) {
+                    Console.WriteLine($"{printedFilters + 1}) " + filterText[i]);
+                    relevantFilters.Add(filterText[i]);
+                    printedFilters++;
+                }
+            }
+            Console.WriteLine("");
+
+            int parsedResult = int.TryParse(Console.ReadLine(), out parsedResult) ? parsedResult : -1;
+
+            while (!Enumerable.Range(1, printedFilters + 1).Contains(parsedResult)) {
+                DisplayError(new NoFilterSelectedError().UEMessage());
+                parsedResult = int.TryParse(Console.ReadLine(), out parsedResult) ? parsedResult : -1;
+            }
+            Console.WriteLine("");
+
+            switch (relevantFilters[parsedResult - 1]) {
+                case "Cargo Space":
+                    return 0;
+                case "Colour":
+                    return 1;
+                case "Top Speed":
+                    return 2;
+                case "Vehicle Type":
+                    return 3;
+                case "Weight":
+                    return 4;
+                case "Wheels":
+                    return 5;
+                default:
+                    return -1;
+            }
+        }
+
+        public bool AskToFilterAgain() {
+            Console.WriteLine("Do you wish to filter again?\n");
+            Console.WriteLine("1) Filter Again");
+            Console.WriteLine("2) Return To Main Menu\n");
+            int parsedResult = int.TryParse(Console.ReadLine(), out parsedResult) ? parsedResult : -1;
+
+            while (parsedResult != 1 && parsedResult != 2) {
+                DisplayError(new OneOrTwoError().UEMessage());
+                parsedResult = int.TryParse(Console.ReadLine(), out parsedResult) ? parsedResult : -1;
+            }
+            Console.WriteLine("");
+
+            if (parsedResult == 1) { return true; } else {
+                return false;
+            }
+        }
+
+        public void PrintFilterResultText(int option) {
+
+            switch (option) {
+                case 1:
+                    Console.WriteLine("No vehicles found after last filtering. Returning to main menu.\n");
+                    break;
+                case 2:
+                    Console.WriteLine("Cancelling filtering. Returning to main menu.\n");
+                    break;
+                case 3:
+                    Console.WriteLine("All filters used. Returning to main menu.\n");
+                    break;
+                default:
+                    break;
+            }
         }
     }
 }

@@ -32,6 +32,8 @@ namespace Garage.Interfaces {
 
         public void PrintArrayOfVehicles(IVehicle[] array);
 
+        public void PrintListOfVehicles(List<IVehicle> list);
+
         public void PrintExitMessage();
 
         public int AskForMethodOfSearchingVehicle();
@@ -44,7 +46,7 @@ namespace Garage.Interfaces {
 
         public void PrintVehicleTypeCount(string type, int count);
 
-        public string AskForType();
+        public string AskForVehicleType();
 
         public Colour AskForColour();
 
@@ -71,5 +73,11 @@ namespace Garage.Interfaces {
         public void PrintRemoveVehicleSuccessMessage(bool parkingSpotRemoval);
 
         public void PrintRemoveVehicleFailureMessage(bool parkingSpotRemoval);
+
+        public int AskWhatToFilterOn(bool[] remainingFilters);
+
+        public bool AskToFilterAgain();
+
+        public void PrintFilterResultText(int option);
     }
 }

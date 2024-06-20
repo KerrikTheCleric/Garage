@@ -26,10 +26,18 @@ namespace GarageTask {
             return Garage.GetVehicleArray<IVehicle>();
         }
 
-        /*public List<IVehicle> GetListOfOnlyVehicles() {
-            List<IVehicle> listOfVehicles = [.. _garage.GetVehicleArray<IVehicle>()];
+        public List<IVehicle> GetListOfOnlyVehicles() {
+
+            List<IVehicle> listOfVehicles = new List<IVehicle>();
+            IVehicle[] array = _garage.GetVehicleArray<IVehicle>();
+
+            for (int i = 0; i < _garage.GetTotalGarageSpaces(); i++) {
+                if (array[i] != null) {
+                    listOfVehicles.Add(array[i]);
+                }
+            }
             return listOfVehicles;
-        }*/
+        }
 
         public int GetTotalGarageSpaces() {
             return _garage.GetTotalGarageSpaces();

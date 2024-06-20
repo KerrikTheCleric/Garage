@@ -113,7 +113,5 @@ namespace GarageTask
         IEnumerator IEnumerable.GetEnumerator() {
             return GetEnumerator();
         }
-
-        
     }
 }
