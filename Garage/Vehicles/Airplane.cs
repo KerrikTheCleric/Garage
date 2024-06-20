@@ -7,7 +7,7 @@ using Garage.Enums;
 
 namespace GarageTask.Vehicles
 {
-    internal class Airplane : Vehicle {
+    public class Airplane : Vehicle {
         private char _flightClass;
 
         public Airplane(string registrationNumber, Colour colour, double cargoSpace, double weight, int topSpeed, char flightClass, int wheels = 3) : base(registrationNumber, colour, cargoSpace, weight, topSpeed, wheels) {

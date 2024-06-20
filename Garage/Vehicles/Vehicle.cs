@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace GarageTask.Vehicles
 {
-    internal class Vehicle : IVehicle {
+    public class Vehicle : IVehicle {
         private string? _registrationNumber;
         private Colour _colour;
         private double _cargoSpace;

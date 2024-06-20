@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace GarageTask.Vehicles
 {
-    internal class Car : Vehicle {
+    public class Car : Vehicle {
         private FuelType _fuelType;
 
         public Car(string registrationNumber, Colour colour, double cargoSpace, double weight, int topSpeed, FuelType fueltype, int wheels = 4) : base(registrationNumber, colour, cargoSpace, weight, topSpeed, wheels) {

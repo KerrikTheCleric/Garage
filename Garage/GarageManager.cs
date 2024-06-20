@@ -134,6 +134,7 @@ namespace Garage {
                         gHandler.AddVehicleToGarage(v);
                     } catch (Exception e) {
                         uI.DisplayError(e.Message);
+                        return;
                     }
                     break;
                 case "Boat":
@@ -144,6 +145,7 @@ namespace Garage {
                         gHandler.AddVehicleToGarage(v);
                     } catch (Exception e) {
                         uI.DisplayError(e.Message);
+                        return;
                     }
                     break;
                 case "Bus":
@@ -154,6 +156,7 @@ namespace Garage {
                         gHandler.AddVehicleToGarage(v);
                     } catch (Exception e) {
                         uI.DisplayError(e.Message);
+                        return;
                     }
                     break;
                 case "Car":
@@ -164,6 +167,7 @@ namespace Garage {
                         gHandler.AddVehicleToGarage(v);
                     } catch (Exception e) {
                         uI.DisplayError(e.Message);
+                        return;
                     }
                     break;
                 case "Motorcycle":
@@ -174,6 +178,7 @@ namespace Garage {
                         gHandler.AddVehicleToGarage(v);
                     } catch (Exception e) {
                         uI.DisplayError(e.Message);
+                        return;
                     }
                     break;
                 case "Vehicle":
@@ -183,6 +188,7 @@ namespace Garage {
                         gHandler.AddVehicleToGarage(v);
                     } catch (Exception e) {
                         uI.DisplayError(e.Message);
+                        return;
                     }
                     break;
                 default:

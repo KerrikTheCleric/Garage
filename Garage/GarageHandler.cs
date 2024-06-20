@@ -17,13 +17,11 @@ namespace GarageTask {
         IGarage<IVehicle> _garage;
 
         public GarageHandler(int garageSize) {
-            Garage = new Garage<IVehicle>(garageSize);
+            _garage = new Garage<IVehicle>(garageSize);
         }
 
-        private IGarage<IVehicle> Garage { get => _garage; set => _garage = value; }
-
         public IVehicle[] GetArrayOfVehiclesAndEmptySpots() {
-            return Garage.GetVehicleArray<IVehicle>();
+            return _garage.GetVehicleArray<IVehicle>();
         }
 
         public List<IVehicle> GetListOfOnlyVehicles() {

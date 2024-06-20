@@ -7,7 +7,7 @@ using Garage.Enums;
 
 namespace Garage.Interfaces
 {
-    internal interface IVehicle
+    public interface IVehicle
     {
 
         public string GetRegistrationNumber();

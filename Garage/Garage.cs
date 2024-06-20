@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace GarageTask
 {
-    internal class Garage<T> : IGarage<T>, IEnumerable<T> where T : IVehicle {
+    public class Garage<T> : IGarage<T>, IEnumerable<T> where T : IVehicle {
         private T[] _vehicles;
         private int _totalGarageSpaces;
         private int _remainingGarageSpaces;

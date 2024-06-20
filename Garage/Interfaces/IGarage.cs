@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Garage.Interfaces {
-    internal interface IGarage<T> {
+    public interface IGarage<T> {
 
         public T[] GetVehicleArray<T2>();
 
