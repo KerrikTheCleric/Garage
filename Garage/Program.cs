@@ -8,14 +8,10 @@ using System.Text.Json;
 /*
  TODO:
 
- 1. Remove JSON File
- 3. Move functionality from Garage to GarageHandler?
- 4. Match interfaces with implementations.
- 5. Print garage using colours?
- 6. Swap properties for standard fields.
- 7. Decide on how to balance custom errors versus exceptions.
- 8. Add offset for first 9 printed vehicles in the display.
- 8. Combine UI Ask methods
+ Print garage using colours?
+ Combine UI Ask methods
+ Remove needless properties
+ Immediately cancel new vehicle process after inputting registration number if it already exists.
  
  */
 
@@ -23,7 +19,6 @@ namespace GarageTask
 {
     internal class Program {
         static void Main(string[] args) {
-
 
             GarageManager gManager = new GarageManager();
 

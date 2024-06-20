@@ -22,7 +22,6 @@ namespace Garage {
             gHandler = new GarageHandler(garageSize);
         }
 
-
         public void StartProgram() {
             if (uI.AskIfGarageShouldBePrefilled()) {
                 PopulateGarage();
@@ -70,6 +69,10 @@ namespace Garage {
             uI.PrintExitMessage();
         }
 
+        /// <summary>
+        /// Displays a single vehicle located via parking number or registration number.
+        /// </summary>
+
         private void DisplayVehicle() {
             IVehicle result = null;
             bool parkingSpotSearch = false;
@@ -96,10 +99,18 @@ namespace Garage {
             }
         }
 
+        /// <summary>
+        /// Displays all vehicles.
+        /// </summary>
+
         private void DisplayAllVehicles() {
             IVehicle[] vehicleArray = gHandler.GetArrayOfVehiclesAndEmptySpots();
             uI.PrintArrayOfVehicles(vehicleArray);
         }
+
+        /// <summary>
+        /// Displays types of vehicles and how many there are.
+        /// </summary>
 
         private void DisplayVehicleTypes() {
             List<string> listOfTypes = gHandler.CollectAllVehicleTypes();
@@ -108,6 +119,10 @@ namespace Garage {
                 uI.PrintVehicleTypeCount(type, gHandler.CountVehiclesOfType(type));
             }
         }
+
+        /// <summary>
+        /// Adds new vehicle to garage.
+        /// </summary>
 
         private void AddVehicle() {
 
@@ -197,6 +212,10 @@ namespace Garage {
             uI.PrintAddVehicleSuccessMessage();
         }
 
+        /// <summary>
+        /// Removes vehicle from the garage via parking number or registration number.
+        /// </summary>
+
         private void RemoveVehicle() {
          
                 switch (uI.AskForMethodOfRemovingVehicle()) {
@@ -221,6 +240,10 @@ namespace Garage {
                     break;
             }
         }
+
+        /// <summary>
+        /// Filters out vehicles using a dynamic list of remaining filters.
+        /// </summary>
 
         private void FilterVehicles() {
 
@@ -309,6 +332,12 @@ namespace Garage {
             uI.PrintFilterResultText(3);
         }
 
+        /// <summary>
+        /// Helper function determining if there are filters left in the array.
+        /// </summary>
+        /// <param name="remainingFilters">The array to check.</param>
+        /// <returns></returns>
+
         private bool FiltersRemain(bool[] remainingFilters) {
             for (int i = 0; i < remainingFilters.Length; i++) {
                 if (remainingFilters[i]) {
@@ -317,6 +346,13 @@ namespace Garage {
             }
             return false;
         }
+
+        /// <summary>
+        /// Filters list on cargo space.
+        /// </summary>
+        /// <param name="listToFilter">List to filter.</param>
+        /// <param name="cargoSpaceFilter">Minimum amount of cargo space.</param>
+        /// <returns></returns>
 
         private List<IVehicle> FilterOnCargoSpace(List<IVehicle> listToFilter, double cargoSpaceFilter) {
 
@@ -330,6 +366,13 @@ namespace Garage {
             return newList;
         }
 
+        /// <summary>
+        /// Filters list on colour.
+        /// </summary>
+        /// <param name="listToFilter">List to filter</param>
+        /// <param name="colourFilter">The exact colour to filter on.</param>
+        /// <returns></returns>
+
         private List<IVehicle> FilterOnColour(List<IVehicle> listToFilter, Colour colourFilter) {
 
             List<IVehicle> newList = new List<IVehicle>();
@@ -341,6 +384,13 @@ namespace Garage {
             }
             return newList;
         }
+
+        /// <summary>
+        /// Filters list on top speed.
+        /// </summary>
+        /// <param name="listToFilter">List to filter.</param>
+        /// <param name="topSpeedFilter">Minimum top speed.</param>
+        /// <returns></returns>
 
         private List<IVehicle> FilterOnTopSpeed(List<IVehicle> listToFilter, int topSpeedFilter) {
 
@@ -354,6 +404,13 @@ namespace Garage {
             return newList;
         }
 
+        /// <summary>
+        /// Filters list on vehicle type.
+        /// </summary>
+        /// <param name="listToFilter">List to filter.</param>
+        /// <param name="vehicleTypeFilter">The exact vehicle type to filter on.</param>
+        /// <returns></returns>
+
         private List<IVehicle> FilterOnVehicleType(List<IVehicle> listToFilter, string vehicleTypeFilter) {
 
             List<IVehicle> newList = new List<IVehicle>();
@@ -365,6 +422,13 @@ namespace Garage {
             }
             return newList;
         }
+
+        /// <summary>
+        /// Filters list on weight.
+        /// </summary>
+        /// <param name="listToFilter">List to filter.</param>
+        /// <param name="weightFilter">Minimum weight.</param>
+        /// <returns></returns>
 
         private List<IVehicle> FilterOnWeight(List<IVehicle> listToFilter, double weightFilter) {
 
@@ -378,17 +442,28 @@ namespace Garage {
             return newList;
         }
 
-        private List<IVehicle> FilterOnWheels(List<IVehicle> listToFilter, int wheelseFilter) {
+        /// <summary>
+        /// Filters list on wheel count.
+        /// </summary>
+        /// <param name="listToFilter">List to filter.</param>
+        /// <param name="wheelsFilter">The exact amount of wheels to filter on.</param>
+        /// <returns></returns>
+
+        private List<IVehicle> FilterOnWheels(List<IVehicle> listToFilter, int wheelsFilter) {
 
             List<IVehicle> newList = new List<IVehicle>();
 
             foreach (IVehicle v in listToFilter) {
-                if (v.GetWheels() == wheelseFilter) {
+                if (v.GetWheels() == wheelsFilter) {
                     newList.Add(v);
                 }
             }
             return newList;
         }
+
+        /// <summary>
+        /// Populates the garage with 1-18 premade vehicles.
+        /// </summary>
 
         private void PopulateGarage() {
 
@@ -417,9 +492,7 @@ namespace Garage {
             prefabList.Add(new Motorcycle("KGG400", Colour.Purple, 12.5, 120.5, 190, false));
             prefabList.Add(new Vehicle("MMP010", Colour.Red, 47.8, 580.7, 600, 7));
 
-
-
-            // Ask how many Vehicles to put in out of the maximum available and maximum
+            // Ask how many Vehicles to put in out of the maximum available and minimum of 1
 
             int vehiclesToAdd = uI.AskHowManyVehiclesShouldBeAddedAutomatically(prefabList.Count, gHandler.GetTotalGarageSpaces());
 

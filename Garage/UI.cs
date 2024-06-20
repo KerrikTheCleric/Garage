@@ -15,6 +15,11 @@ using System.Threading.Tasks;
 namespace Garage {
     internal class UI : IUI {
 
+        /// <summary>
+        /// Loop function for reading Y(es) or N(o).
+        /// </summary>
+        /// <returns>Y or N.</returns>
+
         public char YorN() {
             while (true) {
                 char input = char.ToUpper(Console.ReadKey().KeyChar);
@@ -27,9 +32,19 @@ namespace Garage {
             }
         }
 
+        /// <summary>
+        /// Dispalys an error to the user.
+        /// </summary>
+        /// <param name="error">Error text.</param>
+
         public void DisplayError(string error) {
             Console.WriteLine("Error: " + error);
         }
+
+        /// <summary>
+        /// Asks for size of new garage.
+        /// </summary>
+        /// <returns>Size of the new garage.</returns>
 
         public int AskGarageSize() {
             Console.WriteLine("Initializing new garage. Input the maximum amount of vehicles desired below:\n");
@@ -43,13 +58,19 @@ namespace Garage {
             return parsedResult;
         }
 
-        public void PrintGarage(IVehicle[] vehicles, int totalGarageSpaces) {
+        /// <summary>
+        /// Prints a visual representation of the garage array from left to right. Spots with a vehicle are marked with 'V'.
+        /// </summary>
+        /// <param name="garageArray">Array representing the garage. Contains either IVehicle objects or null values.</param>
+        /// <param name="totalGarageSpaces">The total size of the garage.</param>
+
+        public void PrintGarage(IVehicle[] garageArray, int totalGarageSpaces) {
 
             int columnsPrinted = 0;
             int spacesPrinted = 0;
 
             while (spacesPrinted < 9) {
-                if (vehicles[spacesPrinted] == null) {
+                if (garageArray[spacesPrinted] == null) {
                     Console.Write($" {spacesPrinted + 1}. [ ] ");
                 } else {
                     Console.Write($" {spacesPrinted + 1}. [V] ");
@@ -64,7 +85,7 @@ namespace Garage {
             }
 
             for (int i = spacesPrinted; i < totalGarageSpaces; i++) {
-                if (vehicles[i] == null) {
+                if (garageArray[i] == null) {
                     Console.Write($"{spacesPrinted + 1}. [ ] ");
                 } else {
                     Console.Write($"{spacesPrinted + 1}. [V] ");
@@ -80,6 +101,11 @@ namespace Garage {
             Console.WriteLine("");
         }
 
+        /// <summary>
+        /// Asks the user if the garage should be filled with the premade vehicles.
+        /// </summary>
+        /// <returns>True if yes, false otherwise.</returns>
+
         public bool AskIfGarageShouldBePrefilled() {
             Console.WriteLine("Would you like to fill up the garage with already existing vehicles, Y/N?\n");
 
@@ -91,6 +117,13 @@ namespace Garage {
                 return false;
             }
         }
+
+        /// <summary>
+        /// Asks how many vehicles should be added automatically.
+        /// </summary>
+        /// <param name="availabelVehicles">Amount of premade vehicles.</param>
+        /// <param name="totalGarageSpaces">The total size of the garage.</param>
+        /// <returns></returns>
 
         public int AskHowManyVehiclesShouldBeAddedAutomatically(int availabelVehicles, int totalGarageSpaces) {
 
@@ -125,6 +158,11 @@ namespace Garage {
             Console.WriteLine("Please select an option by inputting the appropriate number as listed below:\n");
         }
 
+        /// <summary>
+        /// The main menu.
+        /// </summary>
+        /// <returns>Number matching the number inputted by the user to pick a function.</returns>
+
         public int MainMenu() {
             Console.WriteLine("1) Display Vehicle");
             Console.WriteLine("2) Display All Vehicles");
@@ -145,6 +183,11 @@ namespace Garage {
             return parsedResult;
         }
 
+        /// <summary>
+        /// Prints out all the parameters of a vehicle on a line. A number can optionally be added in front.
+        /// </summary>
+        /// <param name="v">The vehicle in question.</param>
+        /// <param name="number">The number to print in front of the vehicle.</param>
 
         public void PrintVehicle(IVehicle v, int number = -1) {
 
@@ -206,12 +249,22 @@ namespace Garage {
             }
         }
 
+        /// <summary>
+        /// Prints out the parameters of all vehicles in an array.
+        /// </summary>
+        /// <param name="array">The array containing the vehicles.</param>
+
         public void PrintArrayOfVehicles(IVehicle[] array) {
             for (int i = 0; i < array.Length; i++) {
                 PrintVehicle(array[i], i + 1);
             }
             Console.WriteLine();
         }
+
+        /// <summary>
+        /// Prints out the parameters of all vehicles in a list.
+        /// </summary>
+        /// <param name="list">The list containing the vehicles.</param>
 
         public void PrintListOfVehicles(List<IVehicle> list) {
 
@@ -223,6 +276,11 @@ namespace Garage {
         public void PrintExitMessage() {
             Console.WriteLine("Exiting application...\n");
         }
+
+        /// <summary>
+        /// Asks the user how they wish to find a vehicle.
+        /// </summary>
+        /// <returns>1 for parking number, 2 for registration number.</returns>
 
         public int AskForMethodOfSearchingVehicle() {
 
@@ -239,6 +297,11 @@ namespace Garage {
             return parsedResult;
         }
 
+        /// <summary>
+        /// Asks the user how they wish to remove a vehicle.
+        /// </summary>
+        /// <returns>1 for parking number, 2 for registration number.</returns>
+
         public int AskForMethodOfRemovingVehicle() {
             Console.WriteLine("How do you wish to remove the vehicle?\n");
             Console.WriteLine("1) Parking Number");
@@ -253,6 +316,12 @@ namespace Garage {
             return parsedResult;
         }
 
+        /// <summary>
+        /// Asks the user for a valid parking number.
+        /// </summary>
+        /// <param name="totalGarageSpaces">Serves as the upper limit for valid parking numbers.</param>
+        /// <returns>The desired number adjusted for use in the array.</returns>
+
         public int AskForParkingNumber(int totalGarageSpaces) {
 
             Console.WriteLine($"Please input the desired parking number in the span 1 through {totalGarageSpaces} below:\n");
@@ -266,6 +335,11 @@ namespace Garage {
             Console.WriteLine("");
             return desiredParkingNumber - 1;
         }
+
+        /// <summary>
+        /// Asks the user for a registration number.
+        /// </summary>
+        /// <returns>The inputted registration number.</returns>
 
         public string AskForRegistrationNumber() {
             Console.WriteLine($"Please input the desired registration number formatted like \"ABC123\"\n");
@@ -283,6 +357,11 @@ namespace Garage {
         public void PrintVehicleTypeCount(string type, int count) {
             Console.WriteLine($"{type}: {count}");
         }
+
+        /// <summary>
+        /// Asks for a vehicle type from the displayed menu.
+        /// </summary>
+        /// <returns>The desired vehicle type.</returns>
 
         public string AskForVehicleType() {
             Console.WriteLine("What type of vehicle is it? Select \"Vehicle\" if nothing matches.\n");
@@ -319,6 +398,11 @@ namespace Garage {
                     return "";
             }
         }
+
+        /// <summary>
+        /// Asks for the desired colour from the menu.
+        /// </summary>
+        /// <returns>The desired Colour enum.</returns>
 
         public Colour AskForColour() {
 
@@ -374,6 +458,11 @@ namespace Garage {
             }
         }
 
+        /// <summary>
+        /// Asks for cargo space in cubic meters.
+        /// </summary>
+        /// <returns>Cargo space in cubic meters.</returns>
+
         public double AskForCargoSpace() {
             Console.WriteLine($"Please input the cargo space of the vehicle in cubic meters. Decimal numbers are allowed.");
 
@@ -424,6 +513,11 @@ namespace Garage {
             return parsedResult;
         }
 
+        /// <summary>
+        /// Asks for the flight class 'A', 'B' or 'C'.
+        /// </summary>
+        /// <returns>The chose flight class.</returns>
+
         public char AskForFlightClass() {
 
             Console.WriteLine($"Please provide the flight class of the airplane. Accepted classes are 'A', 'B' & 'C'.");
@@ -438,6 +532,11 @@ namespace Garage {
                 Console.Write("\b \b");
             }
         }
+
+        /// <summary>
+        /// Asks the user to choose between the two binaries.
+        /// </summary>
+        /// <returns>The chosen value.</returns>
 
         public bool AskForHasSail() {
             Console.WriteLine("Does the boat have a sail?\n");
@@ -455,6 +554,11 @@ namespace Garage {
                 return false;
             }
         }
+
+        /// <summary>
+        /// Asks the user to choose between the two binaries.
+        /// </summary>
+        /// <returns>The chosen value.</returns>
 
         public bool AskForIsDoubleDecker() {
             Console.WriteLine("Is the bus a double decker?\n");
@@ -474,6 +578,11 @@ namespace Garage {
 
         }
 
+        /// <summary>
+        /// Asks the user to choose between the two fuel types.
+        /// </summary>
+        /// <returns>The chosen fuel type.</returns>
+
         public FuelType AskForFuelType() {
             Console.WriteLine("Does the car run on Diesel or Gasoline?\n");
             Console.WriteLine("1) Diesel");
@@ -490,6 +599,11 @@ namespace Garage {
                 return FuelType.Gasoline;
             }
         }
+
+        /// <summary>
+        /// Asks the user to choose between the two binaries.
+        /// </summary>
+        /// <returns>The chosen value.</returns>
 
         public bool AskForHasCarriage() {
             Console.WriteLine("Does the motorcycle have a carriage?\n");
@@ -529,6 +643,12 @@ namespace Garage {
             }
             Console.WriteLine("");
         }
+
+        /// <summary>
+        /// Dynamically asks what to filter on.
+        /// </summary>
+        /// <param name="remainingFilters">An array of bools dictating what filters are still valid to pck from.</param>
+        /// <returns>A value corresponding to the chosen category.</returns>
 
         public int AskWhatToFilterOn(bool[] remainingFilters) {
             Console.WriteLine("What do you wish to filter on?\n");
@@ -572,6 +692,11 @@ namespace Garage {
                     return -1;
             }
         }
+
+        /// <summary>
+        /// Asks if the program should filter again.
+        /// </summary>
+        /// <returns>True if yes, fals eotherwise.</returns>
 
         public bool AskToFilterAgain() {
             Console.WriteLine("Do you wish to filter again?\n");

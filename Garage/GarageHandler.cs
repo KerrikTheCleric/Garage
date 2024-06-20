@@ -9,9 +9,6 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace GarageTask {
-
-    // Represents direct UI functions              
-
     internal class GarageHandler : IGarageHandler {
 
         IGarage<IVehicle> _garage;
@@ -20,9 +17,19 @@ namespace GarageTask {
             _garage = new Garage<IVehicle>(garageSize);
         }
 
+        /// <summary>
+        /// Gets the full garage array which can contain empty spots with null.
+        /// </summary>
+        /// <returns>Fhe full garage array which can contain empty spots with null.</returns>
+
         public IVehicle[] GetArrayOfVehiclesAndEmptySpots() {
             return _garage.GetVehicleArray<IVehicle>();
         }
+
+        /// <summary>
+        /// Filters the garage array for vehicles and returns them as a list.
+        /// </summary>
+        /// <returns>A list of vehicle sin the garage.</returns>
 
         public List<IVehicle> GetListOfOnlyVehicles() {
 
@@ -74,6 +81,11 @@ namespace GarageTask {
             return _garage.FindVehicleWithRegistrationNumber(regNumber);
         }
 
+        /// <summary>
+        /// Looks over the garage and collects all the vehicle types present.
+        /// </summary>
+        /// <returns>A list of vehicle types present in the garage.</returns>
+
         public List<String> CollectAllVehicleTypes() {
             List<string> listOfTypes = new List<string>();
 
@@ -87,6 +99,12 @@ namespace GarageTask {
             }
             return listOfTypes;
         }
+
+        /// <summary>
+        /// Counts the vehicles of the provided type in the garage array.
+        /// </summary>
+        /// <param name="type">The vehicle type to count.</param>
+        /// <returns>The amount of that vehicle type present in the garage.</returns>
 
         public int CountVehiclesOfType(string type) {
             int result = 0;

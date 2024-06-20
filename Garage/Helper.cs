@@ -8,6 +8,12 @@ using System.Threading.Tasks;
 namespace Garage {
     internal static class Helper {
 
+        /// <summary>
+        /// Checks if a registration number keeps to the valid standard of 3 letters and 3 numers, like ABC123.
+        /// </summary>
+        /// <param name="regNumber">The registration number to check.</param>
+        /// <returns>True if valid, false otherwise.</returns>
+
         public static bool IsRegistrationNumberValid(string regNumber) {
             if (regNumber.Length != 6) {
                 return false;

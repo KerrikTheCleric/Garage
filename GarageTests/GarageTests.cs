@@ -4,13 +4,11 @@ using Garage.Interfaces;
 using GarageTask;
 using GarageTask.Vehicles;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using GarageTask;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Garage.Enums;
 
 namespace GarageTask.Tests {
     [TestClass()]

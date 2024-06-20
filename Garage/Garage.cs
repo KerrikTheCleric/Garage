@@ -33,6 +33,12 @@ namespace GarageTask
             return _remainingGarageSpaces;
         }
 
+        /// <summary>
+        /// Adds a new vehicle to the garage.
+        /// </summary>
+        /// <param name="newVehicle">The vew vehicle to add.</param>
+        /// <returns>0 upon success, 1 if the garage is full and 2 if the registration number already exists.</returns>
+
         public int AddVehicle(T newVehicle) {
 
             if (_remainingGarageSpaces == 0) {
@@ -57,6 +63,12 @@ namespace GarageTask
             return 0;
         }
 
+        /// <summary>
+        /// Removes a vehicle from a parking spot.
+        /// </summary>
+        /// <param name="index">The number of the parking spot to remove from.</param>
+        /// <returns>True upon success, false upon failure.</returns>
+
         public bool RemoveVehicleAtSpotNumber(int index) {
             if (_vehicles[index] != null) {
                 _vehicles[index] = default(T);
@@ -66,6 +78,12 @@ namespace GarageTask
                 return false;
             }
         }
+
+        /// <summary>
+        /// Removes a vehicle with the provided registration number.
+        /// </summary>
+        /// <param name="regNumber">The registration number to look for.</param>
+        /// <returns>True upon success, false upon failure.</returns>
 
         public bool RemoveVehicleWithRegistrationNumber(string regNumber) {
 
@@ -82,12 +100,24 @@ namespace GarageTask
             return false;
         }
 
+        /// <summary>
+        /// Finds the vehicle on the provided parking spot.
+        /// </summary>
+        /// <param name="index">The number of the parking spot to check</param>
+        /// <returns>The vehicle or null.</returns>
+
         public T FindVehicleAtSpotNumber(int index) {
             if (_totalGarageSpaces > index && index >= 0) {
                 return _vehicles[index];
             }
             return default(T);
         }
+
+        /// <summary>
+        /// Finds the vehicle with the provided registration number.
+        /// </summary>
+        /// <param name="regNumber">The registration number to look for.</param>
+        /// <returns>The vehicle or null.</returns>
 
         public T FindVehicleWithRegistrationNumber(string regNumber) {
 
